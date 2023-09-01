@@ -9,6 +9,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frostlineGamesWebServer", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\frostlineGamesWebServer\Application\Application.csproj", "{1F08554C-AB60-49F6-AD3C-D9A5CC571121}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\frostlineGamesWebServer\Domain\Domain.csproj", "{F62EA78F-9D82-47E1-862E-0618440F673F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\frostlineGamesWebServer\Infrastructure\Infrastructure.csproj", "{685680E1-E50A-4494-9245-38FC15E089F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "src\frostlineGamesWebServer\Persistence\Persistence.csproj", "{4BDFC160-0411-4343-A58C-BD877B67AF0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "src\frostlineGamesWebServer\WebAPI\WebAPI.csproj", "{F5ADC238-5DBF-4D37-ADD0-A301CA5FA6D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +27,22 @@ Global
 		{1F08554C-AB60-49F6-AD3C-D9A5CC571121}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F08554C-AB60-49F6-AD3C-D9A5CC571121}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F08554C-AB60-49F6-AD3C-D9A5CC571121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F62EA78F-9D82-47E1-862E-0618440F673F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62EA78F-9D82-47E1-862E-0618440F673F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62EA78F-9D82-47E1-862E-0618440F673F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62EA78F-9D82-47E1-862E-0618440F673F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{685680E1-E50A-4494-9245-38FC15E089F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{685680E1-E50A-4494-9245-38FC15E089F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{685680E1-E50A-4494-9245-38FC15E089F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{685680E1-E50A-4494-9245-38FC15E089F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BDFC160-0411-4343-A58C-BD877B67AF0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDFC160-0411-4343-A58C-BD877B67AF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDFC160-0411-4343-A58C-BD877B67AF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDFC160-0411-4343-A58C-BD877B67AF0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5ADC238-5DBF-4D37-ADD0-A301CA5FA6D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5ADC238-5DBF-4D37-ADD0-A301CA5FA6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5ADC238-5DBF-4D37-ADD0-A301CA5FA6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5ADC238-5DBF-4D37-ADD0-A301CA5FA6D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,6 +50,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E0809973-7E36-462B-B590-07F92678F240} = {ADA0EBA8-A4F5-41B1-8CEE-2A74F842E3BA}
 		{1F08554C-AB60-49F6-AD3C-D9A5CC571121} = {E0809973-7E36-462B-B590-07F92678F240}
+		{F62EA78F-9D82-47E1-862E-0618440F673F} = {E0809973-7E36-462B-B590-07F92678F240}
+		{685680E1-E50A-4494-9245-38FC15E089F0} = {E0809973-7E36-462B-B590-07F92678F240}
+		{4BDFC160-0411-4343-A58C-BD877B67AF0E} = {E0809973-7E36-462B-B590-07F92678F240}
+		{F5ADC238-5DBF-4D37-ADD0-A301CA5FA6D6} = {E0809973-7E36-462B-B590-07F92678F240}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FC4F74F-4409-494C-825C-987E199B720F}
