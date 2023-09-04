@@ -1,11 +1,14 @@
 using Application;
+using Core.CrossCuttingConcerns.Exceptions;
+using Core.Security.Encryption;
+using Core.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text.Json.Serialization;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,30 +27,27 @@ builder.Services.AddStackExchangeRedisCache(option =>
 {
     option.Configuration = "127.0.0.1:6379";
     //option.InstanceName = "FrostlineGamesRedis";
-
-
-
 }); // Redis
 
-//const string tokenOptionsConfigurationSection = "TokenOptions";
-//TokenOptions tokenOptions =
-//    builder.Configuration.GetSection(tokenOptionsConfigurationSection).Get<TokenOptions>()
-//    ?? throw new InvalidOperationException($"\"{tokenOptionsConfigurationSection}\" section cannot found in configuration.");
-//builder.Services
-//    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = true,
-//            ValidateAudience = true,
-//            ValidateLifetime = true,
-//            ValidIssuer = tokenOptions.Issuer,
-//            ValidAudience = tokenOptions.Audience,
-//            ValidateIssuerSigningKey = true,
-//            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
-//        };
-//    });
+const string tokenOptionsConfigurationSection = "TokenOptions";
+TokenOptions tokenOptions =
+    builder.Configuration.GetSection(tokenOptionsConfigurationSection).Get<TokenOptions>()
+    ?? throw new InvalidOperationException($"\"{tokenOptionsConfigurationSection}\" section cannot found in configuration.");
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+        };
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>
@@ -67,7 +67,7 @@ builder.Services.AddSwaggerGen(opt =>
         {
             Name = "Authorization",
             Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer",
+            Scheme = "",
             BearerFormat = "JWT",
             In = ParameterLocation.Header,
             Description =
