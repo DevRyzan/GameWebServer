@@ -4,8 +4,14 @@ using Application.Service.OperationClaimService;
 using Application.Service.UserDetailService;
 using Application.Service.UserOperationClaimService;
 using Application.Service.UserService;
+using Core.Application.Caching;
+using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Rules;
+using Core.Application.Pipelines.Validation;
+using Core.Application.Transaction;
 using Core.Emailling.EmailServices;
 using Core.Emailling.MailToEmail;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection; 
 
@@ -19,14 +25,18 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-            
+            configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
+            configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
+            configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
         });
 
+        services.AddMemoryCache();
 
+        services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
-        //services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
-
-        //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
 
         #region Core
         services.AddSingleton<IEmailService, EmailManager>();
