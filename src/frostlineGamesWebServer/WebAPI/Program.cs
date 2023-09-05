@@ -2,6 +2,7 @@ using Application;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Encryption;
 using Core.Security.JWT;
+using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -10,16 +11,19 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text.Json.Serialization;
 using WebAPI;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
+
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddPersistenceServices(builder.Configuration);
+
 builder.Services.AddApplicationServices();
+builder.Services.AddSecurityServices();
+builder.Services.AddPersistenceServices(builder.Configuration); 
+//builder.Services.AddInfrastructureServices();
+
 builder.Services.AddHttpContextAccessor();
 
 
@@ -95,6 +99,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
@@ -119,16 +124,23 @@ app.MapControllers();
 
 
 const string webApiConfigurationSection = "WebAPIConfiguration";
-WebAPIConfiguration webApiConfiguration =
-    app.Configuration.GetSection(webApiConfigurationSection).Get<WebAPIConfiguration>()
-    ?? throw new InvalidOperationException($"\"{webApiConfigurationSection}\" section cannot found in configuration.");
-app.UseCors(opt => opt.WithOrigins(webApiConfiguration.AllowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+
+WebAPIConfiguration webApiConfiguration = app
+    .Configuration
+    .GetSection(webApiConfigurationSection)
+    .Get<WebAPIConfiguration>() ?? throw new InvalidOperationException($"\"{webApiConfigurationSection}\" section cannot found in configuration.");
+
+app.UseCors(opt 
+    => opt.WithOrigins(webApiConfiguration.AllowedOrigins)
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials());
+
 
 app.UseCors("ReactJsDomain");
-
-
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("v1/swagger.json", "WebAPI V1");
 });
+
 app.Run();

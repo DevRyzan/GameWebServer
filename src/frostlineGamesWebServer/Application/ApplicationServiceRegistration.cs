@@ -9,10 +9,13 @@ using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Rules;
 using Core.Application.Pipelines.Validation;
 using Core.Application.Transaction;
+using Core.CrossCuttingConcerns.Logging.Serilog;
+using Core.CrossCuttingConcerns.Logging.Serilog.Logger;
 using Core.Emailling.EmailServices;
 using Core.Emailling.MailToEmail;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel.Design;
 using System.Reflection; 
 
 namespace Application;
@@ -28,7 +31,7 @@ public static class ApplicationServiceRegistration
             configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
             configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
             configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
-            configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>)); 
             configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
         });
 
@@ -36,13 +39,14 @@ public static class ApplicationServiceRegistration
 
         services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         #region Core
+        services.AddSingleton<LoggerServiceBase, FileLogger>(); 
         services.AddSingleton<IEmailService, EmailManager>();
         services.AddSingleton<IMailService, MailManager>();
         #endregion
-
+         
         #region User
 
         services.AddScoped<IAuthService, AuthManager>();
@@ -51,8 +55,9 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
         services.AddScoped<IEmailAuthenticatorService, EmailAuthenticatorManager>();
         services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
-        #endregion 
-
+        #endregion
+      
+        
         return services;
     }
     public static IServiceCollection AddSubClassesOfType(this IServiceCollection services, Assembly assembly, Type type, Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null)
