@@ -6,8 +6,7 @@ using Application.Service.UserDetailService;
 using Application.Service.UserService;
 using Domain.Entities.Users;
 using Core.Application.Generator;
-using Application.Feature.UserFeatures.Users.Rules;
-using Application.Service.Repositories.FileRepositories;
+using Application.Feature.UserFeatures.Users.Rules; 
 using Domain.Entities.Files;
 
 namespace Application.Feature.UserFeatures.Users.Command.Create;
@@ -15,18 +14,16 @@ namespace Application.Feature.UserFeatures.Users.Command.Create;
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
 {
     private readonly IUserService _userService;
-    private readonly IUserDetailService _userDetailService;
-    private readonly IUserDetailImageFileRepository _userDetailImageFileRepository;
+    private readonly IUserDetailService _userDetailService; 
     private readonly IMapper _mapper;
     private readonly UserBusinessRules _userBusinessRules;
 
-    public CreateUserCommandHandler(IUserService userService, IUserDetailService userDetailService, IMapper mapper, UserBusinessRules userBusinessRules, IUserDetailImageFileRepository userDetailImageFileRepository)
+    public CreateUserCommandHandler(IUserService userService, IUserDetailService userDetailService, IMapper mapper, UserBusinessRules userBusinessRules)
     {
         _userService = userService;
         _userDetailService = userDetailService;
         _mapper = mapper;
         _userBusinessRules = userBusinessRules;
-        _userDetailImageFileRepository = userDetailImageFileRepository;
     }
 
     public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
@@ -63,9 +60,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest
             Code = UIDGenerator.GenerateUID(modelName: "File")
         };
  
-        await _userDetailService.Create(createdUserDetail);
-
-        await _userDetailImageFileRepository.AddAsync(userDetailImageFile);
+        await _userDetailService.Create(createdUserDetail); 
 
         CreateUserCommandResponse response = _mapper.Map<CreateUserCommandResponse>(createdUser);
 

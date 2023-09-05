@@ -1,12 +1,11 @@
-﻿using Application.Service.Repositories;
-using Application.Service.Repositories.FileRepositories;
+﻿using Application.Service.Repositories; 
 using Application.Services.Repositories.UserRepositories;
+using Core.Persistence.Repositories.ReadRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
-using Persistence.Repositories;
-using Persistence.Repositories.FileRepositories;
+using Persistence.Repositories; 
 using Persistence.Repositories.UserRepositories;
 
 namespace Persistence;
@@ -28,11 +27,16 @@ public static class PersistenceServiceRegistration
         #region User
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
-        services.AddScoped<IUserDetailRepository, UserDetailRepository>(); 
+        services.AddScoped<IUserDetailRepository, UserDetailRepository>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
-        services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
-        services.AddScoped<IUserDetailImageFileRepository, UserDetailImageFileRepository>();
-        #endregion 
+        #endregion
+
+
+        
+        #region File
+        //services.AddScoped<IFileRepository, FileRepository>();
+        //services.AddScoped<IUserDetailImageFileRepository, UserDetailImageFileRepository>();
+        #endregion
 
 
         return services;
