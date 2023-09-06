@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Security.Entities;
+using Domain.Entities.Users;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Models;
 
 namespace Persistence.Context;
@@ -354,10 +356,6 @@ public partial class FrostlineGamesDbContext : DbContext
             entity.HasIndex(e => e.BannedId, "IX_BannedAndUsersDetails_BannedId");
 
             entity.HasIndex(e => e.UserDetailId, "IX_BannedAndUsersDetails_UserDetailId");
-
-            entity.HasOne(d => d.Banned).WithMany(p => p.BannedAndUsersDetails).HasForeignKey(d => d.BannedId);
-
-            entity.HasOne(d => d.UserDetail).WithMany(p => p.BannedAndUsersDetails).HasForeignKey(d => d.UserDetailId);
         });
 
         modelBuilder.Entity<Bard>(entity =>
@@ -370,7 +368,7 @@ public partial class FrostlineGamesDbContext : DbContext
 
             entity.HasOne(d => d.BardIcon).WithMany(p => p.Bards).HasForeignKey(d => d.BardIconId);
 
-            entity.HasOne(d => d.User).WithMany(p => p.Bards).HasForeignKey(d => d.UserId);
+            entity.HasOne(d => d.User);
         });
 
         modelBuilder.Entity<BardAndEloRank>(entity =>
@@ -521,7 +519,7 @@ public partial class FrostlineGamesDbContext : DbContext
         {
             entity.HasIndex(e => e.UserId, "IX_Employees_UserId");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Employees).HasForeignKey(d => d.UserId);
+            entity.HasOne(d => d.User);
         });
 
         modelBuilder.Entity<EmployeeApplication>(entity =>
@@ -654,7 +652,7 @@ public partial class FrostlineGamesDbContext : DbContext
         {
             entity.HasIndex(e => e.UserId, "IX_OtpAuthenticators_UserId");
 
-            entity.HasOne(d => d.User).WithMany(p => p.OtpAuthenticators).HasForeignKey(d => d.UserId);
+            entity.HasOne(d => d.User);
         });
 
         modelBuilder.Entity<OurGame>(entity =>
@@ -789,7 +787,7 @@ public partial class FrostlineGamesDbContext : DbContext
                 .HasColumnName("UserIP");
             entity.Property(e => e.UserNickName).HasMaxLength(60);
 
-            entity.HasOne(d => d.UserDetail).WithMany(p => p.SupportRequests).HasForeignKey(d => d.UserDetailId);
+            entity.HasOne(d => d.UserDetail);
         });
 
         modelBuilder.Entity<SupportRequestAndSupportRequestCategory>(entity =>
@@ -829,7 +827,7 @@ public partial class FrostlineGamesDbContext : DbContext
 
             entity.HasOne(d => d.SupportRequest).WithMany(p => p.SupportRequestComments).HasForeignKey(d => d.SupportRequestId);
 
-            entity.HasOne(d => d.User).WithMany(p => p.SupportRequestComments).HasForeignKey(d => d.UserId);
+            entity.HasOne(d => d.User);
         });
 
         modelBuilder.Entity<TeamAndEmployee>(entity =>
@@ -862,8 +860,8 @@ public partial class FrostlineGamesDbContext : DbContext
             entity.HasIndex(e => e.UserId, "UserId")
                 .IsUnique()
                 .HasFilter("([UserId] IS NOT NULL)");
-
-            entity.HasOne(d => d.User).WithOne(p => p.UserDetail).HasForeignKey<UserDetail>(d => d.UserId);
+            entity.Property(u => u.Address).HasColumnName("Adress");
+            entity.HasOne(d => d.User);
         });
 
         modelBuilder.Entity<UserDetailImageFile>(entity =>
@@ -874,7 +872,7 @@ public partial class FrostlineGamesDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.UserDetailImageFile).HasForeignKey<UserDetailImageFile>(d => d.Id);
 
-            entity.HasOne(d => d.UserDetail).WithMany(p => p.UserDetailImageFiles).HasForeignKey(d => d.UserDetailId);
+            entity.HasOne(d => d.UserDetail);
         });
 
         modelBuilder.Entity<UserOperationClaim>(entity =>
@@ -885,7 +883,7 @@ public partial class FrostlineGamesDbContext : DbContext
 
             entity.Property(e => e.Code).HasMaxLength(60);
 
-            entity.HasOne(d => d.OperationClaim).WithMany(p => p.UserOperationClaims).HasForeignKey(d => d.OperationClaimId);
+            entity.HasOne(d => d.OperationClaim);
 
             entity.HasOne(d => d.User).WithMany(p => p.UserOperationClaims).HasForeignKey(d => d.UserId);
         });
