@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Security.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Persistence.Models;
