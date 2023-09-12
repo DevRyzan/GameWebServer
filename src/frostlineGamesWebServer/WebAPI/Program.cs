@@ -3,6 +3,7 @@ using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Encryption;
 using Core.Security.JWT;
 using Infrastructure;
+using Infrastructure.Services.Storage.Local;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -62,6 +63,10 @@ builder.Services.AddCors(opt =>
     .AllowAnyHeader()
     .AllowAnyMethod());
 });
+
+
+
+builder.Services.AddStorage<LocalStorage>();
 
 builder.Services.AddSwaggerGen(opt =>
 {
@@ -136,7 +141,7 @@ app.UseCors(opt
     .AllowAnyMethod()
     .AllowCredentials());
 
-
+app.UseStaticFiles();
 app.UseCors("ReactJsDomain");
 app.UseSwaggerUI(c =>
 {

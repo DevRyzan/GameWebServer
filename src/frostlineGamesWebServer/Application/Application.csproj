@@ -18,4 +18,29 @@
 		<ProjectReference Include="..\..\corePackages\Core.Security\Core.Security.csproj" />
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequestComments\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequestCategories\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequestAndTags\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequestAndSupportRequestCategories\" />
+	  <Folder Include="Features\SupportRequestFeatures\PossibleRequests\" />
+	  <Folder Include="Features\SupportRequestFeatures\PossibleRequestAndTags\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\AssignToEmployee\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\ChangeStatus\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\ChangeStatusType\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\Create\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\Delete\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\Update\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Commads\Remove\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Profiles\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByAssignedUserId\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByCreatedDate\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByInActiveSupportRequest\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByPrioritySupportRequest\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByStatusTypeSupportRequest\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByTagIdSupportRequest\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListByUserIdSupportRequest\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListInActiveByCreatedDate\" />
+	  <Folder Include="Features\SupportRequestFeatures\SupportRequests\Queries\GetListInActiveByLoggedId\" />
+	</ItemGroup>
 </Project>

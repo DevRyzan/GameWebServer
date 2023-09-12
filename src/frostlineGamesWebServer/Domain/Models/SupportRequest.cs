@@ -47,4 +47,5 @@ public partial class SupportRequest
     public virtual ICollection<SupportRequestComment> SupportRequestComments { get; set; } = new List<SupportRequestComment>();
 
     public virtual UserDetail UserDetail { get; set; } = null!;
+
 }
