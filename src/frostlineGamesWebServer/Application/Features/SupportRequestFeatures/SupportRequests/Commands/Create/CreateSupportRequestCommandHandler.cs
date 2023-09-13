@@ -55,7 +55,7 @@ public class CreateSupportRequestCommandHandler : IRequestHandler<CreateSupportR
 
         mappedSupportRequest.SupportRequestPriority = SupportRequestPriority.Low;
         mappedSupportRequest.SupportRequestCategoryId = request.CreatedSupportRequestDto.SupportRequestCategoryId;
-        mappedSupportRequest.SupportRequestComment = request.CreatedSupportRequestDto.Comment;
+        mappedSupportRequest.SupportRequestCoomment = request.CreatedSupportRequestDto.Comment;
         mappedSupportRequest.SupportRequestTitle = request.CreatedSupportRequestDto.Title;
         mappedSupportRequest.UserDetailId = userDetail.Id;
 

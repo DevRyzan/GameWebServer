@@ -26,7 +26,7 @@ public class UpdateSupportRequestCommandHandler : IRequestHandler<UpdateSupportR
         SupportRequest supportRequest = await _supportRequestService.GetById(request.Id);
         supportRequest.SupportRequestCategoryId = request.SupportRequestCategoryId;
         supportRequest.SupportRequestTitle = request.Title;
-        supportRequest.SupportRequestComment = request.Comment;
+        supportRequest.SupportRequestCoomment = request.Comment;
         supportRequest.SupportRequestPriority = request.SupportRequestPriority;
 
         await _supportRequestService.Update(supportRequest);

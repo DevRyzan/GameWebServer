@@ -77,7 +77,7 @@ public class TagManager : ITagService
     }
     public async Task<IPaginate<Tag>> GetListByTagPriority(TagPriority tagPriority, int index = 0, int size = 10)
     {
-        IPaginate<Tag> tags = await _tagRepository.GetListAsync(a => a.TagPriority.Equals(tagPriority), index: index, size: size);
+        IPaginate<Tag> tags = await _tagRepository.GetListAsync(a => a.TagPriority.Equals(Convert.ToInt32(tagPriority)), index: index, size: size);
         return tags;
     }
 

@@ -11,4 +11,9 @@ public class PossibleRequestAndTag : Entity<int>
     public virtual PossibleRequest PossibleRequest { get; set; } = null!;
 
     public virtual Tag Tag { get; set; } = null!;
+
+    public static implicit operator PossibleRequestAndTag(PossibleRequest v)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -83,7 +83,7 @@ public class SupportRequestCommentController : BaseController
         return Ok(result);
     }
 
-    [HttpPatch("ChangeStatus")]
+    [HttpPut("ChangeStatus")]
     public async Task<IActionResult> ChangeStatus([FromBody] ChangeStatusSupportRequestCommentRequest request)
     {
         ChangeStatusSupportRequestCommentResponse result = await Mediator.Send(request);

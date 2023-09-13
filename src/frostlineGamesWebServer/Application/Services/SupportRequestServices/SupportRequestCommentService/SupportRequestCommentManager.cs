@@ -69,10 +69,7 @@ public class SupportRequestCommentManager : ISupportRequestCommentService
     }
     public async Task<IPaginate<SupportRequestComment>> GetListByUserId(Guid userId, int index = 0, int size = 10)
     {
-        Expression<Func<SupportRequestComment, bool>> predicate = src => src.SupportRequest.UserDetail.UserId == userId;
-        Func<IQueryable<SupportRequest>, IQueryable<SupportRequest>> include =
-            query => query.Include(sr => sr.SupportRequestComments);
-        var userSupportRequestCommentList = await _supportRequestCommentRepository.GetListAsync(predicate: predicate, index: index, size: size);
+        var userSupportRequestCommentList = await _supportRequestCommentRepository.GetListAsync(x => x.UserId.Equals(userId), index: index, size: size);
         return userSupportRequestCommentList;
     }
     public async Task<IPaginate<SupportRequestComment>> GetListBySupportRequestId(int supportRequestId, int index = 0, int size = 10)
@@ -82,8 +79,7 @@ public class SupportRequestCommentManager : ISupportRequestCommentService
     }
     public async Task<IPaginate<SupportRequestComment>> GetListByUserIdAndSupportRequestId(Guid userId, int supportRequestId, int index = 0, int size = 10)
     {
-        Expression<Func<SupportRequestComment, bool>> predicate = src => src.SupportRequest.UserDetail.UserId == userId && src.SupportRequestId.Equals(supportRequestId);
-        var userSupportRequestCommentList = await _supportRequestCommentRepository.GetListAsync(predicate: predicate, index: index, size: size);
+        var userSupportRequestCommentList = await _supportRequestCommentRepository.GetListAsync(x => x.UserId.Equals(userId) && x.SupportRequestId.Equals(supportRequestId), index: index, size: size);
         return userSupportRequestCommentList;
 
     }
@@ -133,8 +129,8 @@ public class SupportRequestCommentManager : ISupportRequestCommentService
     }
     public async Task<IPaginate<SupportRequestComment>> GetListByUserIdAndSupportRequestIdByStatusTrue(Guid userId, int supportRequestId, int index = 0, int size = 10)
     {
-        Expression<Func<SupportRequestComment, bool>> predicate = src => src.SupportRequest.UserDetail.UserId == userId && src.SupportRequestId.Equals(supportRequestId) && src.Status == true;
-        var userSupportRequestCommentList = await _supportRequestCommentRepository.GetListAsync(predicate: predicate, index: index, size: size);
+       
+        var userSupportRequestCommentList = await _supportRequestCommentRepository.GetListAsync(x => x.UserId.Equals(userId) && x.SupportRequestId.Equals(supportRequestId), index: index, size: size);
         return userSupportRequestCommentList;
 
     }

@@ -8,7 +8,7 @@ public class SupportRequest : Entity<int>
 {
     public string? SupportRequestTitle { get; set; }
 
-    public string? SupportRequestComment { get; set; }
+    public string? SupportRequestCoomment { get; set; }
 
     public string? UserIp { get; set; }
 
@@ -26,8 +26,6 @@ public class SupportRequest : Entity<int>
     public DateTime? AssignedTime { get; set; }
 
     public int SupportRequestCategoryId { get; set; }
-
-    public Guid UserId { get; set; }
 
     public int UserDetailId { get; set; }
 

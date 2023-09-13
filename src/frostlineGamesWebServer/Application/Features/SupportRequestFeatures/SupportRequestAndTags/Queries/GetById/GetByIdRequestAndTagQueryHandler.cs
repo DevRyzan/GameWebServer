@@ -42,7 +42,7 @@ public class GetByIdRequestAndTagQueryHandler : IRequestHandler<GetByIdRequestAn
         GetByIdRequestAndTagQueryResponse mappedResponse = _mapper.Map<GetByIdRequestAndTagQueryResponse>(supportRequestsAndTags);
         mappedResponse.TagName = tag.Name;
         mappedResponse.SupportRequestTitle = supportRequest.SupportRequestTitle;
-        mappedResponse.SupportRequestComment = supportRequest.SupportRequestComment;
+        mappedResponse.SupportRequestComment = supportRequest.SupportRequestCoomment;
 
         return mappedResponse;
     }

@@ -18,6 +18,7 @@ public class MappingProfile : Profile
     {
         CreateMap<Tag, ChangeStatusTagCommandResponse>().ReverseMap();
         CreateMap<Tag, CreateTagCommandResponse>().ReverseMap();
+        CreateMap<Tag, CreateTagCommandRequest>().ReverseMap();
         CreateMap<Tag, DeleteTagCommandRequest>().ReverseMap();
         CreateMap<Tag, RemovedTagCommandResponse>().ReverseMap();
         CreateMap<Tag, UpdateTagCommandResponse>().ReverseMap();

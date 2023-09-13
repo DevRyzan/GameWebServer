@@ -39,7 +39,7 @@ public class GetByIdSuppRequestAndCategoryHandler : IRequestHandler<GetByIdSuppR
 
         GetByIdSuppRequestAndCategoryResponse mappedResponse = _mapper.Map<GetByIdSuppRequestAndCategoryResponse>(supportRequestAndSupportRequestCategory);
         mappedResponse.SupportRequestTitle = supportRequest.SupportRequestTitle;
-        mappedResponse.SupportRequestComment = supportRequest.SupportRequestComment;
+        mappedResponse.SupportRequestComment = supportRequest.SupportRequestCoomment;
         mappedResponse.SupportRequestCategoryName = supportRequestCategory.Name;
 
         return mappedResponse;
