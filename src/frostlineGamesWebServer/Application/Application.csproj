@@ -19,9 +19,6 @@
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Features\SupportRequestFeatures\SupportRequestComments\" />
-	  <Folder Include="Features\SupportRequestFeatures\SupportRequestCategories\" />
-	  <Folder Include="Features\SupportRequestFeatures\SupportRequestAndTags\" />
 	  <Folder Include="Features\SupportRequestFeatures\SupportRequestAndSupportRequestCategories\" />
 	  <Folder Include="Features\SupportRequestFeatures\PossibleRequests\" />
 	  <Folder Include="Features\SupportRequestFeatures\PossibleRequestAndTags\" />
