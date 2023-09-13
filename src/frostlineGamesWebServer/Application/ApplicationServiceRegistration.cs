@@ -4,6 +4,7 @@ using Application.Service.OperationClaimService;
 using Application.Service.UserDetailService;
 using Application.Service.UserOperationClaimService;
 using Application.Service.UserService;
+using Application.Services.BardServices;
 using Application.Services.SupportRequestServices.PossibleRequestAndTagService;
 using Application.Services.SupportRequestServices.PossibleRequestService;
 using Application.Services.SupportRequestServices.SupportRequestAndSupportRequestCategoryService;
@@ -53,7 +54,11 @@ public static class ApplicationServiceRegistration
         services.AddSingleton<IEmailService, EmailManager>();
         services.AddSingleton<IMailService, MailManager>();
         #endregion
-         
+
+        #region Bard
+        services.AddScoped<IBardService, BardManager>();
+        #endregion
+
         #region User
 
         services.AddScoped<IAuthService, AuthManager>();

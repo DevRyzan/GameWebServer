@@ -1,4 +1,6 @@
 ﻿using Application.Service.Repositories;
+using Application.Services.Repositories.BardRepositories;
+using Application.Services.Repositories.FileRepositories;
 using Application.Services.Repositories.SupportRequestRepositories;
 using Application.Services.Repositories.UserRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
 using Persistence.Repositories;
+using Persistence.Repositories.BardRepositories;
+using Persistence.Repositories.FileRepositories;
 using Persistence.Repositories.SupportRequestRepositories;
 using Persistence.Repositories.UserRepositories;
 
@@ -25,6 +29,10 @@ public static class PersistenceServiceRegistration
 
         #endregion
 
+        #region Bard
+        services.AddScoped<IBardRepository, BardRepository>();
+        #endregion
+
         #region User
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
@@ -33,8 +41,8 @@ public static class PersistenceServiceRegistration
         #endregion
 
         #region File
-        //services.AddScoped<IFileRepository, FileRepository>();
-        //services.AddScoped<IUserDetailImageFileRepository, UserDetailImageFileRepository>();
+        services.AddScoped<IFileRepository, FileRepository>();
+        services.AddScoped<IUserDetailImageFileRepository, UserDetailImageFileRepository>();
         #endregion
 
         #region SupportRequest

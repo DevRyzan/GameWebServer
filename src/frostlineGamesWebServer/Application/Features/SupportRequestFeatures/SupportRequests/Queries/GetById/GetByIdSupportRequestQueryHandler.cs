@@ -5,16 +5,16 @@ using AutoMapper;
 using Domain.Entities.SupportRequests;
 using MediatR;
 
-namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetByIdSupportRequest;
+namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetById;
 
-public class GetByIdSupportRequestQuery : IRequestHandler<GetByIdSupportRequestRequest, GetByIdSupportRequestResponse>
+public class GetByIdSupportRequestQueryHandler : IRequestHandler<GetByIdSupportRequestQueryRequest, GetByIdSupportRequestQueryResponse>
 {
     private readonly ISupportRequestService _supportRequestService;
     private readonly IMapper _mapper;
     private readonly SupportRequestBusinessRules _supportRequestBusinessRules;
     private readonly IUserDetailService _userDetailService;
 
-    public GetByIdSupportRequestQuery(ISupportRequestService supportRequestService, IMapper mapper, SupportRequestBusinessRules supportRequestBusinessRules, IUserDetailService userDetailService)
+    public GetByIdSupportRequestQueryHandler(ISupportRequestService supportRequestService, IMapper mapper, SupportRequestBusinessRules supportRequestBusinessRules, IUserDetailService userDetailService)
     {
         _supportRequestService = supportRequestService;
         _mapper = mapper;
@@ -22,14 +22,14 @@ public class GetByIdSupportRequestQuery : IRequestHandler<GetByIdSupportRequestR
         _userDetailService = userDetailService;
     }
 
-    public async Task<GetByIdSupportRequestResponse> Handle(GetByIdSupportRequestRequest request, CancellationToken cancellationToken)
+    public async Task<GetByIdSupportRequestQueryResponse> Handle(GetByIdSupportRequestQueryRequest request, CancellationToken cancellationToken)
     {
         await _supportRequestBusinessRules.SupportRequestShouldBeExist(request.GetByIdSupportRequestDto.Id);
         SupportRequest supportRequest = await _supportRequestService.GetById(request.GetByIdSupportRequestDto.Id);
 
         var userDetail = await _userDetailService.GetById(supportRequest.UserDetailId);
 
-        GetByIdSupportRequestResponse supportRequestDto = _mapper.Map<GetByIdSupportRequestResponse>(supportRequest);
+        GetByIdSupportRequestQueryResponse supportRequestDto = _mapper.Map<GetByIdSupportRequestQueryResponse>(supportRequest);
         supportRequestDto.UserId = (Guid)userDetail.UserId;
         return supportRequestDto;
     }

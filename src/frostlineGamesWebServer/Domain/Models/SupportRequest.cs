@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Users; 
+﻿using Domain.Entities.Users;
+using Domain.Enums;
 
 namespace Persistence.Models;
 
@@ -18,7 +19,7 @@ public partial class SupportRequest
 
     public int? SupportRequestStatusType { get; set; }
 
-    public int SupportRequestPriority { get; set; }
+    public SupportRequestPriority SupportRequestPriority { get; set; }
 
     public Guid? AssignedUserId { get; set; }
 

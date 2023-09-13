@@ -1,5 +1,6 @@
 ﻿using Core.Persistence.Repositories;
 using Domain.Entities.Users;
+using Domain.Enums;
 
 namespace Domain.Entities.SupportRequests;
 
@@ -14,10 +15,11 @@ public class SupportRequest : Entity<int>
     public string? UserEmail { get; set; }
 
     public string? UserNickName { get; set; }
+    public bool CanWriteBack { get; set; }
 
-    public int? SupportRequestStatusType { get; set; }
+    public SupportRequestStatusType? SupportRequestStatusType { get; set; }
 
-    public int SupportRequestPriority { get; set; }
+    public SupportRequestPriority SupportRequestPriority { get; set; }
 
     public Guid? AssignedUserId { get; set; }
 

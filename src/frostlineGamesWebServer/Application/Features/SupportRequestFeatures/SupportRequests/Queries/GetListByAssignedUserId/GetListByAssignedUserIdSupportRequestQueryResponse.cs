@@ -1,8 +1,8 @@
 ﻿using Domain.Enums;
 
-namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByActiveSupportRequest;
+namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByAssignedUserId;
 
-public class GetListByActiveSuppRequestResponse
+public class GetListByAssignedUserIdSupportRequestQueryResponse
 {
     public int Id { get; set; }
     public string? Title { get; set; }
@@ -16,7 +16,6 @@ public class GetListByActiveSuppRequestResponse
     public string? userImagePath { get; set; }
     public SupportRequestStatusType? SupportRequestStatusType { get; set; }
     public SupportRequestPriority SupportRequestPriority { get; set; }
-    //Status type a göre statusunu true yada false çekmek mümkün
     public int SupportRequestCategoryId { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }

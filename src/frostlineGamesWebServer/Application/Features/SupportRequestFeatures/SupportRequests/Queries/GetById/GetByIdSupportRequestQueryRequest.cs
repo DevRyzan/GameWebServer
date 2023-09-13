@@ -1,9 +1,10 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Dtos;
+using Core.Application.Caching;
 using MediatR;
 
-namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetByIdSupportRequest;
+namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetById;
 
-public class GetByIdSupportRequestRequest : IRequest<GetByIdSupportRequestResponse>, ICachableRequest
+public class GetByIdSupportRequestQueryRequest : IRequest<GetByIdSupportRequestQueryResponse>, ICachableRequest
 {
     public GetByIdSupportRequestDto GetByIdSupportRequestDto { get; set; }
 

@@ -1,12 +1,11 @@
-﻿using Core.Security.Entities;
-using System;
-using System.Collections.Generic;
+﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
+using Persistence.Models;
 
-namespace Persistence.Models;
+namespace Domain.Entities.Bards;
 
-public partial class Bard
+public class Bard : Entity<int>
 {
-    public int Id { get; set; }
 
     public Guid UserId { get; set; }
 
@@ -19,16 +18,6 @@ public partial class Bard
     public string IconUrl { get; set; } = null!;
 
     public string Email { get; set; } = null!;
-
-    public string? Code { get; set; }
-
-    public bool Status { get; set; }
-
-    public DateTime CreatedDate { get; set; }
-
-    public DateTime? UpdatedDate { get; set; }
-
-    public DateTime? DeletedDate { get; set; }
 
     public virtual ICollection<BardAndEloRank> BardAndEloRanks { get; set; } = new List<BardAndEloRank>();
 
@@ -57,9 +46,4 @@ public partial class Bard
     public virtual ICollection<GamCredit> GamCredits { get; set; } = new List<GamCredit>();
 
     public virtual User User { get; set; } = null!;
-
-    public static implicit operator Bard(Domain.Entities.Bards.Bard v)
-    {
-        throw new NotImplementedException();
-    }
 }

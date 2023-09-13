@@ -7,9 +7,9 @@ using Core.Persistence.Paging;
 using Domain.Entities.SupportRequests;
 using MediatR;
 
-namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByActiveSupportRequest;
+namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByActive;
 
-public class GetListByActiveSuppRequestHandler : IRequestHandler<GetListByActiveSuppRequestRequest, GetListResponse<GetListSupportRequestListModel>>
+public class GetListByActiveSupportRequestQueryHandler : IRequestHandler<GetListByActiveSupportRequestQueryRequest, GetListResponse<GetListSupportRequestListModel>>
 {
     private readonly ISupportRequestService _supportRequestService;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ public class GetListByActiveSuppRequestHandler : IRequestHandler<GetListByActive
     private readonly IUserDetailImageFileRepository _userDetailImageFileRepository;
 
 
-    public GetListByActiveSuppRequestHandler(ISupportRequestService supportRequestService, IMapper mapper, SupportRequestBusinessRules supportRequestBusinessRules, IUserDetailImageFileRepository userDetailImageFileRepository)
+    public GetListByActiveSupportRequestQueryHandler(ISupportRequestService supportRequestService, IMapper mapper, SupportRequestBusinessRules supportRequestBusinessRules, IUserDetailImageFileRepository userDetailImageFileRepository)
     {
         _supportRequestService = supportRequestService;
         _mapper = mapper;
@@ -25,7 +25,7 @@ public class GetListByActiveSuppRequestHandler : IRequestHandler<GetListByActive
         _userDetailImageFileRepository = userDetailImageFileRepository;
     }
 
-    public async Task<GetListResponse<GetListSupportRequestListModel>> Handle(GetListByActiveSuppRequestRequest request, CancellationToken cancellationToken)
+    public async Task<GetListResponse<GetListSupportRequestListModel>> Handle(GetListByActiveSupportRequestQueryRequest request, CancellationToken cancellationToken)
     {
         await _supportRequestBusinessRules.SupportRequestListShouldBeListedWhenSelected(request.PageRequest.Page, request.PageRequest.PageSize);
 

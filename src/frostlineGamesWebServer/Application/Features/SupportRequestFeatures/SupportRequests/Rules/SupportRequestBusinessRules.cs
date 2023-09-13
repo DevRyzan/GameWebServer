@@ -1,5 +1,6 @@
 ﻿using Application.Feature.UserFeatures.Auths.Constans;
 using Application.Features.SupportRequestFeatures.SupportRequests.Constants;
+using Application.Services.Repositories.BardRepositories;
 using Application.Services.Repositories.SupportRequestRepositories;
 using Application.Services.Repositories.UserRepositories;
 using Core.Application.Pipelines.Rules;
@@ -18,15 +19,17 @@ public class SupportRequestBusinessRules : BaseBusinessRules
     private readonly IUserDetailRepository _userDetailRepository;
     private readonly IUserOperationClaimRepository _userOperationClaimRepository;
     private readonly ISupportRequestCategoryRepository _supportRequestCategoryRepository;
+    private readonly IBardRepository _bardRepository;
 
 
-    public SupportRequestBusinessRules(ISupportRequestRepository supportRequestRepository, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository, IUserDetailRepository userDetailRepository, ISupportRequestCategoryRepository supportRequestCategoryRepository)
+    public SupportRequestBusinessRules(ISupportRequestRepository supportRequestRepository, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository, IUserDetailRepository userDetailRepository, ISupportRequestCategoryRepository supportRequestCategoryRepository, IBardRepository bardRepository)
     {
         _supportRequestRepository = supportRequestRepository;
         _userRepository = userRepository;
         _userOperationClaimRepository = userOperationClaimRepository;
         _userDetailRepository = userDetailRepository;
         _supportRequestCategoryRepository = supportRequestCategoryRepository;
+        _bardRepository = bardRepository;
     }
     public virtual async Task SupportRequestShouldBeExist(int id)
     {
@@ -90,6 +93,13 @@ public class SupportRequestBusinessRules : BaseBusinessRules
         var supportRequestCategory = await _supportRequestCategoryRepository.GetAsync(x => x.Id.Equals(categoryId));
         if (supportRequestCategory == null) throw new BusinessException(SupportRequestMessages.SupportRequestCategoryDonNotExists);
     }
+    //public async Task UserShouldBeEmployee(Guid userId)
+    //{
+    //    User? result = await _userRepository.GetAsync(b => b.Id.Equals(userId));
+    //    Employee employee = await _employeeRepository.GetAsync(a => a.UserId.Equals(result.Id));
+
+    //    if (employee == null) throw new BusinessException(SupportRequestMessages.UserShouldBeEmployee);
+    //}
     public virtual async Task UserShouldBeExistsWhenSelected(Guid? userId)
     {
         User? result = await _userRepository.GetAsync(b => b.Id.Equals(userId));

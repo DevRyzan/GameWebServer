@@ -4,9 +4,9 @@ using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 
-namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByActiveSupportRequest;
+namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByActive;
 
-public class GetListByActiveSuppRequestRequest : IRequest<GetListResponse<GetListSupportRequestListModel>>, ICachableRequest 
+public class GetListByActiveSupportRequestQueryRequest : IRequest<GetListResponse<GetListSupportRequestListModel>>, ICachableRequest 
 {
     public PageRequest PageRequest { get; set; }
 
