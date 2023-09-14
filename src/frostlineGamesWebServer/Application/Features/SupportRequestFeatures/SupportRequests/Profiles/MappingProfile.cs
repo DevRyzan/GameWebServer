@@ -1,4 +1,5 @@
-﻿using Application.Features.SupportRequestFeatures.SupportRequests.Commands.ChangeStatus;
+﻿using Application.Features.SupportRequestFeatures.SupportRequests.Commands.AssignToEmployee;
+using Application.Features.SupportRequestFeatures.SupportRequests.Commands.ChangeStatus;
 using Application.Features.SupportRequestFeatures.SupportRequests.Commands.ChangeStatusType;
 using Application.Features.SupportRequestFeatures.SupportRequests.Commands.Create;
 using Application.Features.SupportRequestFeatures.SupportRequests.Commands.Delete;
@@ -15,6 +16,7 @@ using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetLis
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByCreatedDate;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByPriority;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByTagId;
+using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByUserId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListInActiveByCreatedDate;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListInActiveByLoggedId;
 using AutoMapper;
@@ -48,6 +50,7 @@ public class MappingProfile : Profile
 
         CreateMap<SupportRequest, GetByIdSupportRequestQueryRequest>().ReverseMap();
         CreateMap<SupportRequest, GetByIdSupportRequestQueryResponse>().ReverseMap();
+        CreateMap<SupportRequest, AssignToEmployeeSupportRequestCommandResponse>().ReverseMap();
 
 
         CreateMap<SupportRequest, GetActiveListByAssignedUserIdQueryResponse>().ReverseMap();
@@ -88,5 +91,8 @@ public class MappingProfile : Profile
 
         CreateMap<SupportRequest, GetListByActiveForAssignedUserInformationQueryResponse>().ReverseMap();
         CreateMap<IPaginate<SupportRequest>, GetListResponse<GetListByActiveForAssignedUserInformationQueryResponse>>().ReverseMap();
+
+        CreateMap<SupportRequest, GetListByUserIdSupportRequestQueryResponse>().ReverseMap();
+        CreateMap<IPaginate<SupportRequest>, GetListResponse<GetListByUserIdSupportRequestQueryResponse>>().ReverseMap();
     }
 }

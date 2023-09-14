@@ -26,8 +26,8 @@ public class RemovePossibleRequestCommandHandler : IRequestHandler<RemovePossibl
     public async Task<RemovedPossibleRequestCommandResponse> Handle(RemovePossibleRequestCommandRequest request, CancellationToken cancellationToken)
     {
 
-        await _possibleRequestBusinessRules.PossibleRequestIdShouldBeExist(request.Id);
-        PossibleRequest possibleRequest = await _possibleRequestService.GetById(request.Id);
+        await _possibleRequestBusinessRules.PossibleRequestIdShouldBeExist(request.RemovedPossibleRequestDto.Id);
+        PossibleRequest possibleRequest = await _possibleRequestService.GetById(request.RemovedPossibleRequestDto.Id);
 
         await _possibleRequestBusinessRules.PossibleRequestStatusShouldBeFalse(possibleRequest.Id);
         await _possibleRequestBusinessRules.PossibleRequestShouldNotBeExistInPossibleRequestAndTag(possibleRequest.Id);

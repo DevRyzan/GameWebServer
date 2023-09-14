@@ -36,7 +36,7 @@ public class GetByIdUserQueryHandler : IRequestHandler<GetByIdQueryRequest, GetB
 
         userDto.PhoneNumber = userDetail.PhoneNumber;
         userDto.NickName = user.FirstName + user.LastName;
-        userDto.Address = userDetail.Address;
+        userDto.Address = userDetail.Adress;
         userDto.IsBanned = userDetail.IsBanned;
         userDto.DeletedDate = userDetail.DeletedDate;
         userDto.UpdatedDate = userDetail.UpdatedDate;

@@ -39,7 +39,7 @@ public class GetByFirstNameAndLastNameQueryHandler : IRequestHandler<GetByFirstN
 
             item.PhoneNumber = userDetail.PhoneNumber;
             item.BasketId = userDetail.BasketId;
-            item.Address = userDetail.Address;
+            item.Address = userDetail.Adress;
             item.IsBanned = userDetail.IsBanned;
             item.DeletedDate = userDetail.DeletedDate;
             item.UpdatedDate = userDetail.UpdatedDate;

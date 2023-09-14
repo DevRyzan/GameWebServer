@@ -45,10 +45,7 @@ public class SupportRequestBusinessRules : BaseBusinessRules
     }
     public virtual async Task SupportRequestShouldBeExistWhenSelectedByUserId(Guid userId)
     {
-        var detail = await _userDetailRepository.GetAsync(predicate: a => a.UserId.Equals(userId));
-
-        var result = await _supportRequestRepository.GetAsync(predicate: a => a.UserDetail.UserId == userId);
-
+        var result = await _supportRequestRepository.GetAsync(a => a.UserDetail.UserId.Equals(userId));
         if (result == null) throw new BusinessException(SupportRequestMessages.SupportRequestShouldBeExist);
     }
     public virtual async Task<bool> IfBardExistTakeBardsNickname(Guid userId)

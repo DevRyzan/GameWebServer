@@ -11,6 +11,6 @@ public class EditCommentSupportRequestCommandRequest : IRequest<EditCommentSuppo
     public string Comment { get; set; }
 
     public bool BypassCache { get; }
-    public string CacheKey { get; }
+    public string CacheKey => $"EditCommentSupportRequestCommandRequest ({Id} ) ";
     public string? CacheGroupKey => "GetSupportRequestComments";
 }

@@ -1,4 +1,6 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequestComments.Rules;
+using Application.Service.OperationClaimService;
+using Application.Service.UserOperationClaimService;
 using Application.Service.UserService;
 using Application.Services.SupportRequestServices.SupportRequestCommentService;
 using Application.Services.SupportRequestServices.SupportRequestService;
@@ -17,7 +19,9 @@ public class CreateSupportRequestCommentCommandHandler : IRequestHandler<CreateS
     private readonly IUserService _userService;
     private readonly ISupportRequestService _supportRequestService;
     private readonly IMailService _mailService;
-    public CreateSupportRequestCommentCommandHandler(ISupportRequestCommentService supportRequestCommentService, SupportRequestCommentBusinessRules supportRequestCommentBusinessRules, IMapper mapper, IUserService userService, ISupportRequestService supportRequestService, IMailService mailService)
+    private readonly IUserOperationClaimService _userOperationClaimService;
+    private readonly IOperationClaimService _operationClaimService;
+    public CreateSupportRequestCommentCommandHandler(ISupportRequestCommentService supportRequestCommentService, SupportRequestCommentBusinessRules supportRequestCommentBusinessRules, IMapper mapper, IUserService userService, ISupportRequestService supportRequestService, IMailService mailService, IUserOperationClaimService userOperationClaimService, IOperationClaimService operationClaimService)
     {
         _supportRequestCommentService = supportRequestCommentService;
         _supportRequestCommentBusinessRules = supportRequestCommentBusinessRules;
@@ -25,6 +29,8 @@ public class CreateSupportRequestCommentCommandHandler : IRequestHandler<CreateS
         _userService = userService;
         _supportRequestService = supportRequestService;
         _mailService = mailService;
+        _userOperationClaimService = userOperationClaimService;
+        _operationClaimService = operationClaimService;
     }
 
     public async Task<CreatedSupportRequestCommentResponse> Handle(CreateSupportRequestCommentCommandRequest request, CancellationToken cancellationToken)
@@ -46,12 +52,15 @@ public class CreateSupportRequestCommentCommandHandler : IRequestHandler<CreateS
         await _supportRequestCommentBusinessRules.UserIdShouldBeExist(request.UserId);
 
         var user = await _userService.GetById(id: request.UserId);
+        var userOperationClaim = await _userOperationClaimService.GetByUserId(user.Id);
+        var userRole = await _operationClaimService.GetById(userOperationClaim.OperationClaimId);
 
 
         SupportRequestComment createSupportRequestComment = new()
         {
             UserName = $"{user.FirstName}{user.LastName}",
-            UserRole = "role",
+            UserId = request.UserId,
+            UserRole = userRole.Name,
             Comment = request.CreateSupportRequestCommentDto.Comment,
             SupportRequestId = supportRequest.Id,
             IsEdited = false,

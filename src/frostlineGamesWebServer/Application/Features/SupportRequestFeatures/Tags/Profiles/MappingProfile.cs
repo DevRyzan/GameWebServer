@@ -19,7 +19,7 @@ public class MappingProfile : Profile
         CreateMap<Tag, ChangeStatusTagCommandResponse>().ReverseMap();
         CreateMap<Tag, CreateTagCommandResponse>().ReverseMap();
         CreateMap<Tag, CreateTagCommandRequest>().ReverseMap();
-        CreateMap<Tag, DeleteTagCommandRequest>().ReverseMap();
+        CreateMap<Tag, DeletedTagCommandResponse>().ReverseMap();
         CreateMap<Tag, RemovedTagCommandResponse>().ReverseMap();
         CreateMap<Tag, UpdateTagCommandResponse>().ReverseMap();
 
@@ -27,6 +27,10 @@ public class MappingProfile : Profile
 
         CreateMap<IPaginate<Tag>, GetListResponse<GetListTagQueryResponse>>().ReverseMap();
         CreateMap<Tag, GetListTagQueryResponse>().ReverseMap();
+
+        CreateMap<IPaginate<Tag>, GetListResponse<GetListByPriorityTagQueryResponse>>().ReverseMap();
+        CreateMap<Tag, GetListByPriorityTagQueryResponse>().ReverseMap();
+
 
         CreateMap<IPaginate<Tag>, GetListResponse<GetListByPriorityTagQueryResponse>>().ReverseMap();
         CreateMap<Tag, GetListByPriorityTagQueryResponse>().ReverseMap();

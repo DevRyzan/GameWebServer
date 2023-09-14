@@ -24,7 +24,7 @@ public class RemoveSupportRequestCommentCommandHandler : IRequestHandler<RemoveS
     {
 
 
-        SupportRequestComment removeSupportRequestCommentMapped = await _supportRequestCommentService.GetById(request.Id);
+        SupportRequestComment removeSupportRequestCommentMapped = await _supportRequestCommentService.GetById(request.RemoveSupportRequestCommentDto.Id);
 
         await _supportRequestCommentBusinessRules.SupportRequestCommentShouldBeExist(removeSupportRequestCommentMapped);
 

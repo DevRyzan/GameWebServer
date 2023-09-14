@@ -26,6 +26,7 @@ public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommandRequest, 
         Tag tag = await _tagService.GetById(request.Id);
         tag.Name = request.Name;
         tag.Description = request.Description;
+        tag.TagPriority = request.TagPriority;
 
         await _tagService.Update(tag);
 

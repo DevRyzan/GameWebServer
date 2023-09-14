@@ -1,4 +1,6 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequestComments.Rules;
+using Application.Service.OperationClaimService;
+using Application.Service.UserOperationClaimService;
 using Application.Service.UserService;
 using Application.Services.SupportRequestServices.SupportRequestCommentService;
 using Application.Services.SupportRequestServices.SupportRequestService;
@@ -18,8 +20,10 @@ public class CreateAdminSupportRequestCommentCommandHandler : IRequestHandler<Cr
     private readonly IUserService _userService;
     private readonly ISupportRequestService _supportRequestService;
     private readonly IMailService _mailService;
+    private readonly IUserOperationClaimService _userOperationClaimService;
+    private readonly IOperationClaimService _operationClaimService;
 
-    public CreateAdminSupportRequestCommentCommandHandler(ISupportRequestCommentService supportRequestCommentService, SupportRequestCommentBusinessRules supportRequestCommentBusinessRules, IMapper mapper, IUserService userService, ISupportRequestService supportRequestService, IMailService mailService)
+    public CreateAdminSupportRequestCommentCommandHandler(ISupportRequestCommentService supportRequestCommentService, SupportRequestCommentBusinessRules supportRequestCommentBusinessRules, IMapper mapper, IUserService userService, ISupportRequestService supportRequestService, IMailService mailService, IUserOperationClaimService userOperationClaimService, IOperationClaimService operationClaimService)
     {
         _supportRequestCommentService = supportRequestCommentService;
         _supportRequestCommentBusinessRules = supportRequestCommentBusinessRules;
@@ -27,6 +31,8 @@ public class CreateAdminSupportRequestCommentCommandHandler : IRequestHandler<Cr
         _userService = userService;
         _supportRequestService = supportRequestService;
         _mailService = mailService;
+        _userOperationClaimService = userOperationClaimService;
+        _operationClaimService = operationClaimService;
     }
 
     public async Task<CreateAdminSupportRequestCommentCommandResponse> Handle(CreateAdminSupportRequestCommentCommandRequest request, CancellationToken cancellationToken)
@@ -43,12 +49,15 @@ public class CreateAdminSupportRequestCommentCommandHandler : IRequestHandler<Cr
         await _supportRequestCommentBusinessRules.UserIdShouldBeExist(request.UserId);
 
         var user = await _userService.GetById(id: request.UserId);
+        var userOperationClaim = await _userOperationClaimService.GetByUserId(user.Id);
+        var userRole = await _operationClaimService.GetById(userOperationClaim.OperationClaimId);
 
 
         SupportRequestComment createSupportRequestComment = new()
         {
             UserName = $"{user.FirstName}{user.LastName}",
-            UserRole = "Admin",
+            UserRole = userRole.Name,
+            UserId = request.UserId,
             Comment = request.CreateSupportRequestCommentDto.Comment,
             SupportRequestId = supportRequest.Id,
             IsEdited = false,

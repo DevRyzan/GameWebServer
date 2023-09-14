@@ -25,9 +25,15 @@ public class GetListByInActiveSuppRequestAndCategoryHandler : IRequestHandler<Ge
     {
         await _supportRequestAndSupportRequestCategoryBusinessRules.SupportRequestAndSupportRequestCategoryListShouldBeListedWhenSelected(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        IPaginate<SupportRequestAndSupportRequestCategory> SupportRequestAndSupportCategory = await _supportRequestAndSupportRequestCategoryService.GetInActiveList(request.PageRequest.Page, request.PageRequest.PageSize);
+        IPaginate<SupportRequestAndSupportRequestCategory> supportRequestAndSupportCategory = await _supportRequestAndSupportRequestCategoryService.GetInActiveList(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        GetListResponse<GetListByInActiveSuppRequestAndCategoryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByInActiveSuppRequestAndCategoryResponse>>(SupportRequestAndSupportCategory);
+        GetListResponse<GetListByInActiveSuppRequestAndCategoryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByInActiveSuppRequestAndCategoryResponse>>(supportRequestAndSupportCategory);
+
+        for (int i = 0; i < supportRequestAndSupportCategory.Count; i++)
+        {
+            mappedResponse.Items[i].RequestId = supportRequestAndSupportCategory.Items[i].SupportRequestId;
+            mappedResponse.Items[i].CategoryId = supportRequestAndSupportCategory.Items[i].SupportRequestCategoryId;
+        }
 
         return mappedResponse;
     }

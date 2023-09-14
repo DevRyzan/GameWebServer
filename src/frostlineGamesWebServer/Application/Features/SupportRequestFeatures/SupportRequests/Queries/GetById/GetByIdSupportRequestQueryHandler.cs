@@ -30,6 +30,9 @@ public class GetByIdSupportRequestQueryHandler : IRequestHandler<GetByIdSupportR
         var userDetail = await _userDetailService.GetById(supportRequest.UserDetailId);
 
         GetByIdSupportRequestQueryResponse supportRequestDto = _mapper.Map<GetByIdSupportRequestQueryResponse>(supportRequest);
+        supportRequestDto.SupportRequestTitle = supportRequest.SupportRequestTitle;
+        supportRequestDto.SupportRequestCoomment = supportRequest.SupportRequestCoomment;
+
         supportRequestDto.UserId = (Guid)userDetail.UserId;
         return supportRequestDto;
     }

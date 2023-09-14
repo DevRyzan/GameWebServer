@@ -13,6 +13,9 @@ public class DeleteSupportRequestCommentCommandRequest : IRequest<DeletedSupport
 
 
     public bool BypassCache { get; }
-    public string CacheKey { get; }
+    public string CacheKey => $"EditCommentSupportRequestCommandRequest ({Id} ) ";
+
     public string? CacheGroupKey => "GetSupportRequestComments";
 }
+
+

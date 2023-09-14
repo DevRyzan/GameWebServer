@@ -1,4 +1,5 @@
-﻿using Core.Application.Caching;
+﻿using Application.Features.SupportRequestFeatures.SupportRequestComments.Dtos;
+using Core.Application.Caching;
 using Core.Application.Transaction;
 using Domain.Enums;
 using MediatR;
@@ -14,6 +15,6 @@ public class UpdateSupportRequestCommandRequest : IRequest<UpdateSupportRequestC
     public SupportRequestPriority SupportRequestPriority { get; set; }
 
     public bool BypassCache { get; }
-    public string CacheKey { get; }
+    public string CacheKey => $"UpdateSupportRequestCommandRequest ({Id} ) ";
     public string? CacheGroupKey => "GetSupportRequest";
 }

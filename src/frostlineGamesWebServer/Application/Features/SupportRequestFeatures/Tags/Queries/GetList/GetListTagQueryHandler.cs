@@ -26,7 +26,7 @@ public class GetListTagQueryHandler : IRequestHandler<GetListTagQueryRequest, Ge
 
         IPaginate<Tag> tag = await _tagService.GetList(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        GetListResponse<GetListTagQueryResponse> tagListModel = _mapper.Map<GetListResponse<GetListTagQueryResponse>>(tag);
+        GetListResponse<GetListTagQueryResponse> tagListModel = _mapper.Map<GetListResponse<GetListTagQueryResponse>>(tag.Items);
         return tagListModel;
     }
 }

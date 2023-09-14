@@ -77,9 +77,13 @@ public class SupportRequestCommentController : BaseController
     }
 
     [HttpDelete("Remove")]
-    public async Task<IActionResult> Remove([FromQuery] RemoveSupportRequestCommentCommandRequest supportRequestCommentCommandRequest)
+    public async Task<IActionResult> Remove([FromQuery] RemoveSupportRequestCommentDto RemoveSupportRequestCommentDto)
     {
-        RemoveSupportRequestCommentCommandResponse result = await Mediator.Send(supportRequestCommentCommandRequest);
+        RemoveSupportRequestCommentCommandRequest request = new()
+        {
+            RemoveSupportRequestCommentDto = RemoveSupportRequestCommentDto
+        };
+        RemoveSupportRequestCommentCommandResponse result = await Mediator.Send(request);
         return Ok(result);
     }
 

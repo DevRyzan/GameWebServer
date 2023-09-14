@@ -1,4 +1,5 @@
-﻿using Core.Application.Caching;
+﻿using Application.Features.SupportRequestFeatures.SupportRequestComments.Dtos;
+using Core.Application.Caching;
 using Core.Application.Transaction;
 using MediatR;
 
@@ -18,6 +19,7 @@ public class UpdateSupportRequestCommentCommandRequest : IRequest<UpdatedSupport
 
 
     public bool BypassCache { get; }
-    public string CacheKey { get; }
+    public string CacheKey => $"UpdateSupportRequestCommentCommandRequest ({Id} ) ";
     public string? CacheGroupKey => "GetSupportRequestComments";
 }
+

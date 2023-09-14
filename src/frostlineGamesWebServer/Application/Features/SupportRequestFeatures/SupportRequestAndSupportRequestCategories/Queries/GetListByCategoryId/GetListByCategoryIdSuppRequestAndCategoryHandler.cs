@@ -24,8 +24,16 @@ public class GetListByCategoryIdSuppRequestAndCategoryHandler : IRequestHandler<
                                                               index: request.GetByCategoryIdSupportRequestAndCategoryDto.PageRequest.Page,
                                                               size: request.GetByCategoryIdSupportRequestAndCategoryDto.PageRequest.PageSize);
 
-        GetListResponse<GetListByCategoryIdSuppRequestAndCategoryResponse> mappedRequestAndCategoryModel = _mapper.Map<GetListResponse<GetListByCategoryIdSuppRequestAndCategoryResponse>>(list);
-        return mappedRequestAndCategoryModel;
+        GetListResponse<GetListByCategoryIdSuppRequestAndCategoryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByCategoryIdSuppRequestAndCategoryResponse>>(list);
+
+        for (int i = 0; i < mappedResponse.Count; i++)
+        {
+            mappedResponse.Items[i].CategoryId = list.Items[i].SupportRequestCategoryId;
+            mappedResponse.Items[i].RequestId = list.Items[i].SupportRequestId;
+            mappedResponse.Items[i].CategoryName = list.Items[i].SupportRequestCategory.Name;
+        }
+
+        return mappedResponse;
     }
 }
 

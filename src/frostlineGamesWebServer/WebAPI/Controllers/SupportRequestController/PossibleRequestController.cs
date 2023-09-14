@@ -56,8 +56,12 @@ public class PossibleRequestController : BaseController
     }
 
     [HttpDelete("Remove")]
-    public async Task<IActionResult> Remove([FromQuery] RemovePossibleRequestCommandRequest request)
+    public async Task<IActionResult> Remove([FromQuery] RemovedPossibleRequestDto removedPossibleRequestDto)
     {
+        RemovePossibleRequestCommandRequest request = new()
+        {
+             RemovedPossibleRequestDto = removedPossibleRequestDto
+        };
         RemovedPossibleRequestCommandResponse result = await Mediator.Send(request);
         return Ok(result);
     }

@@ -47,9 +47,9 @@ public class CreateSupportRequestCommandHandler : IRequestHandler<CreateSupportR
         User? user = await _userService.GetById(request.UserId);
         UserDetail userDetail = await _userDetailService.GetByUserId(user.Id);
 
-        Bard bard = await _bardService.GetByUserId(request.UserId);
+        //Bard bard = await _bardService.GetByUserId(request.UserId);
 
-        var result = await _supportRequestBusinessRules.IfBardExistTakeBardsNickname(request.UserId);
+        //var result = await _supportRequestBusinessRules.IfBardExistTakeBardsNickname(request.UserId);
 
         SupportRequest mappedSupportRequest = _mapper.Map<SupportRequest>(request);
 
@@ -59,8 +59,8 @@ public class CreateSupportRequestCommandHandler : IRequestHandler<CreateSupportR
         mappedSupportRequest.SupportRequestTitle = request.CreatedSupportRequestDto.Title;
         mappedSupportRequest.UserDetailId = userDetail.Id;
 
-        if (result)
-            mappedSupportRequest.UserNickName = bard.NickName;
+        //if (result)
+            //mappedSupportRequest.UserNickName = bard.NickName;
 
         mappedSupportRequest.UserEmail = user.Email;
         mappedSupportRequest.Status = false;

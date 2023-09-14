@@ -38,6 +38,7 @@ public class GetListByActiveForAssignedUserInformationQueryHandler : IRequestHan
 
         GetListResponse<GetListByActiveForAssignedUserInformationQueryResponse> mappedSupportRequestListModel = _mapper.Map<GetListResponse<GetListByActiveForAssignedUserInformationQueryResponse>>(supportRequest);
 
+
         foreach (var item in mappedSupportRequestListModel.Items)
         {
             var userImageFile = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(item.UserDetailId));

@@ -46,7 +46,10 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<SupportRequestAndSupportRequestCategory>, GetListResponse<GetListByInActiveSuppRequestAndCategoryResponse>>().ReverseMap();
         CreateMap<SupportRequestAndSupportRequestCategory, GetListByInActiveSuppRequestAndCategoryResponse>().ReverseMap();
 
-        CreateMap<IPaginate<SupportRequestAndSupportRequestCategory>, GetListResponse<GetByRequestIdSuppRequestAndCategoryResponse>>().ReverseMap();
-        CreateMap<SupportRequestAndSupportRequestCategory, GetByRequestIdSuppRequestAndCategoryResponse>().ReverseMap();
+        CreateMap<IPaginate<SupportRequestAndSupportRequestCategory>, GetListResponse<GetListByRequestIdSuppRequestAndCategoryResponse>>().ReverseMap();
+        CreateMap<SupportRequestAndSupportRequestCategory, GetListByRequestIdSuppRequestAndCategoryResponse>().ReverseMap();
+
+        CreateMap<IPaginate<SupportRequestAndSupportRequestCategory>, GetListResponse<GetListSuppRequestAndCategoryResponse>>().ReverseMap();
+        CreateMap<SupportRequestAndSupportRequestCategory, GetListSuppRequestAndCategoryResponse>().ReverseMap();
     }
 }

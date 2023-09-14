@@ -26,10 +26,17 @@ public class GetListSuppRequestAndCategoryHandler : IRequestHandler<GetListSuppR
     {
         await _supportRequestAndSupportRequestCategoryBusinessRules.SupportRequestAndSupportRequestCategoryListShouldBeListedWhenSelected(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        IPaginate<SupportRequestAndSupportRequestCategory> SupportRequestAndSupportCategory = await _supportRequestAndSupportRequestCategoryService.GetList(request.PageRequest.Page, request.PageRequest.PageSize);
+        IPaginate<SupportRequestAndSupportRequestCategory> supportRequestAndSupportCategory = await _supportRequestAndSupportRequestCategoryService.GetList(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        GetListResponse<GetListSuppRequestAndCategoryResponse> mappedRequestIdSupportRequestAndSupportRequestCategoryListModel = _mapper.Map<GetListResponse<GetListSuppRequestAndCategoryResponse>>(SupportRequestAndSupportCategory);
+        GetListResponse<GetListSuppRequestAndCategoryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListSuppRequestAndCategoryResponse>>(supportRequestAndSupportCategory);
 
-        return mappedRequestIdSupportRequestAndSupportRequestCategoryListModel;
+        for (int i = 0; i < supportRequestAndSupportCategory.Count; i++)
+        {
+            mappedResponse.Items[i].RequestId = supportRequestAndSupportCategory.Items[i].SupportRequestId;
+            mappedResponse.Items[i].CategoryId = supportRequestAndSupportCategory.Items[i].SupportRequestCategoryId;
+        }
+
+
+        return mappedResponse;
     }
 }

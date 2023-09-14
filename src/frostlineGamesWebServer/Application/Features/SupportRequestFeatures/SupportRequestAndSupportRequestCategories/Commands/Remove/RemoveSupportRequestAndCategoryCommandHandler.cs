@@ -22,8 +22,8 @@ public class RemoveSupportRequestAndCategoryCommandHandler : IRequestHandler<Rem
 
     public async Task<RemoveSupportRequestAndCategoryCommandResponse> Handle(RemoveSupportRequestAndCategoryCommandRequest request, CancellationToken cancellationToken)
     {
-        await _supportRequestAndSupportRequestCategoryBusinessRules.SupportRequestAndSupportRequestCategoryIdShouldExistWhenSelected(request.Id);
-        SupportRequestAndSupportRequestCategory? result = await _supportRequestAndSupportRequestCategoryService.GetById(request.Id);
+        await _supportRequestAndSupportRequestCategoryBusinessRules.SupportRequestAndSupportRequestCategoryIdShouldExistWhenSelected(request.RemovedSupportRequestAndSupportRequestCategoryDto.Id);
+        SupportRequestAndSupportRequestCategory? result = await _supportRequestAndSupportRequestCategoryService.GetById(request.RemovedSupportRequestAndSupportRequestCategoryDto.Id);
 
         await _supportRequestAndSupportRequestCategoryBusinessRules.SupportRequestAndSupportRequestCategoryStatusShouldBeFalse(result.Id);
 

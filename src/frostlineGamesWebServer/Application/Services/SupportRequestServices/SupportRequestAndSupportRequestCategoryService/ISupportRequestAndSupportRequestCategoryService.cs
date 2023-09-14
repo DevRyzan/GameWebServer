@@ -24,6 +24,7 @@ public interface ISupportRequestAndSupportRequestCategoryService
 
     #region List Services
     Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetListByCategoryId(int categoryId, int index = 0, int size = 10);
+    Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetListBySupportRequestId(int supportRequestId, int index = 0, int size = 10);
     Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetList(int index = 0, int size = 10);
     Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetByActiveList(int index = 0, int size = 10);
     Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetInActiveList(int index = 0, int size = 10);

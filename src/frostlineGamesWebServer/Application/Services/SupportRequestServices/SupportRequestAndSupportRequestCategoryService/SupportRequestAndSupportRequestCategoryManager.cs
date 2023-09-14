@@ -1,6 +1,7 @@
 ﻿using Application.Services.Repositories.SupportRequestRepositories;
 using Core.Persistence.Paging;
 using Domain.Entities.SupportRequests;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.SupportRequestServices.SupportRequestAndSupportRequestCategoryService;
 
@@ -82,7 +83,25 @@ public class SupportRequestAndSupportRequestCategoryManager : ISupportRequestAnd
     }
     public async Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetListByCategoryId(int categoryId, int index = 0, int size = 10)
     {
-        IPaginate<SupportRequestAndSupportRequestCategory> paginate = await _supportRequestAndSupportRequestCategoryRepository.GetListAsync(x => x.SupportRequestCategoryId.Equals(categoryId), index: index, size: size);
+        IPaginate<SupportRequestAndSupportRequestCategory> paginate = await _supportRequestAndSupportRequestCategoryRepository.GetListAsync(
+            index: index, 
+            size: size,   
+            predicate: x => x.SupportRequestCategoryId.Equals(categoryId),
+            include: t => t.Include(u => u.SupportRequest).Include(u => u.SupportRequestCategory)
+        );
+        return paginate;
+    }
+
+
+    public async Task<IPaginate<SupportRequestAndSupportRequestCategory>> GetListBySupportRequestId(int supportRequestId, int index = 0, int size = 10)
+    {
+        IPaginate<SupportRequestAndSupportRequestCategory> paginate = await _supportRequestAndSupportRequestCategoryRepository.GetListAsync(
+            index: index, 
+            size: size,   
+            predicate: x => x.SupportRequestId.Equals(supportRequestId),
+            include: t => t.Include(u => u.SupportRequest).Include(u => u.SupportRequestCategory)
+        );
+
         return paginate;
     }
 
@@ -92,7 +111,9 @@ public class SupportRequestAndSupportRequestCategoryManager : ISupportRequestAnd
         IPaginate<SupportRequestAndSupportRequestCategory> paginate = await _supportRequestAndSupportRequestCategoryRepository.GetListAsync(x => x.SupportRequestCategoryId.Equals(categoryId) && x.Status == true, index: index, size: size);
         return paginate;
     }
+
     #endregion
     #endregion
-  
+
 }
+

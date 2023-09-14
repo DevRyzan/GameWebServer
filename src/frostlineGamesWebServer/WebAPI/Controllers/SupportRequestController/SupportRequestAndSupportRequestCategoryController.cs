@@ -42,8 +42,12 @@ public class SupportRequestAndSupportRequestCategoryController : BaseController
     }
 
     [HttpDelete("Remove")]
-    public async Task<IActionResult> Remove([FromQuery] RemoveSupportRequestAndCategoryCommandRequest request)
+    public async Task<IActionResult> Remove([FromQuery] RemovedSupportRequestAndSupportRequestCategoryDto supportRequestAndSupportRequestCategoryDto)
     {
+        RemoveSupportRequestAndCategoryCommandRequest request = new()
+        {
+            RemovedSupportRequestAndSupportRequestCategoryDto = supportRequestAndSupportRequestCategoryDto
+        };
         RemoveSupportRequestAndCategoryCommandResponse result = await Mediator.Send(request);
         return Ok(result);
     }
@@ -69,11 +73,12 @@ public class SupportRequestAndSupportRequestCategoryController : BaseController
     [HttpGet("GetByRequestId")]
     public async Task<IActionResult> GetByRequestId([FromQuery] GetByRequestIdSupportRequestAndCategoryDto getByRequestIdSupportRequestAndCategoryDto)
     {
-        GetByRequestIdSuppRequestAndCategoryRequest request = new()
+        GetListByRequestIdSuppRequestAndCategoryRequest request = new()
         {
-            GetByRequestIdSupportRequestAndCategoryDto = getByRequestIdSupportRequestAndCategoryDto
+            GetByRequestIdSupportRequestAndCategoryDto = getByRequestIdSupportRequestAndCategoryDto,
+             PageRequest = getByRequestIdSupportRequestAndCategoryDto.PageRequest
         };
-        GetByRequestIdSuppRequestAndCategoryResponse result = await Mediator.Send(request);
+        GetListResponse<GetListByRequestIdSuppRequestAndCategoryResponse> result = await Mediator.Send(request);
         return Ok(result);
     }
 

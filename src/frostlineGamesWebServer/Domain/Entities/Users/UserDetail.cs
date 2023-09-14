@@ -8,7 +8,7 @@ public class UserDetail : Entity<int>
     public Guid? UserId { get; set; }
     public int? BasketId { get; set; }
     public string? PhoneNumber { get; set; }
-    public string? Address { get; set; }
+    public string? Adress { get; set; }
     public bool? IsOnline { get; set; }
     public bool? IsBanned { get; set; }
     public DateTime? LoggedDate { get; set; }
@@ -36,7 +36,7 @@ public class UserDetail : Entity<int>
         UserId = userId;
         BasketId = basketId;
         PhoneNumber = phoneNumber;
-        Address = address;
+        Adress = address;
         IsOnline = ısOnline;
         IsBanned = ısBanned;
         LoggedDate = loggedDate;
@@ -51,7 +51,7 @@ public class UserDetail : Entity<int>
         UserId = userId;
         BasketId = basketId;
         PhoneNumber = phoneNumber;
-        Address = address;
+        Adress = address;
         IsOnline = ısOnline;
         IsBanned = ısBanned;
         LoggedDate = loggedDate;

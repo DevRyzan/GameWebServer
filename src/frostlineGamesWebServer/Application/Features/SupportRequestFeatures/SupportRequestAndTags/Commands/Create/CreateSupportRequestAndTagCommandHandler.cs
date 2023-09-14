@@ -28,9 +28,9 @@ public class CreateSupportRequestAndTagCommandHandler : IRequestHandler<CreateSu
 
     public async Task<CreateSupportRequestAndTagCommandResponse> Handle(CreateSupportRequestAndTagCommandRequest request, CancellationToken cancellationToken)
     {
-        await _supportRequestAndTagBusinessRules.SupportRequestIdShouldBeExistWhenCreating(request.CreatedSupportRequestAndTagDto.SupportRequestId);
+        await _supportRequestAndTagBusinessRules.SupportRequestIdShouldBeExistWhenCreating(request.CreatedSupportRequestAndTagDto.RequestId);
         await _supportRequestAndTagBusinessRules.TagIdShouldBeExistWhenCreating(request.CreatedSupportRequestAndTagDto.TagId);
-        await _supportRequestAndTagBusinessRules.SupportRequestAndTagCannotRepeat(request.CreatedSupportRequestAndTagDto.SupportRequestId, request.CreatedSupportRequestAndTagDto.TagId);
+        await _supportRequestAndTagBusinessRules.SupportRequestAndTagCannotRepeat(request.CreatedSupportRequestAndTagDto.RequestId, request.CreatedSupportRequestAndTagDto.TagId);
 
         SupportRequestAndTag mappedSupportRequestAndTag = _mapper.Map<SupportRequestAndTag>(request);
         mappedSupportRequestAndTag.Code = UIDGenerator.GenerateUID(modelName: "SupportRequestAndTag");
@@ -42,7 +42,7 @@ public class CreateSupportRequestAndTagCommandHandler : IRequestHandler<CreateSu
         List<SupportRequestAndTag> supportRequestAndTags = await _supportRequestAndTagService.GetListByRequestId(createdSupportRequestAndTag.SupportRequestId);
 
         List<Tag> tags = await _tagService.GetListByTagIds(supportRequestAndTags.Select(x => x.TagId).ToList());
-        SupportRequest supportRequest = await _supportRequestService.GetById(request.CreatedSupportRequestAndTagDto.SupportRequestId);
+        SupportRequest supportRequest = await _supportRequestService.GetById(request.CreatedSupportRequestAndTagDto.RequestId);
 
         int lowCount = 0; int mediumCount = 0; int highCount = 0;
 

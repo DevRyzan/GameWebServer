@@ -5,7 +5,7 @@ public class CreateSupportRequestAndTagValidator : AbstractValidator<CreateSuppo
 {
     public CreateSupportRequestAndTagValidator()
     {
-        RuleFor(x => x.CreatedSupportRequestAndTagDto.SupportRequestId).NotEmpty().NotNull();
+        RuleFor(x => x.CreatedSupportRequestAndTagDto.RequestId).NotEmpty().NotNull();
         RuleFor(x => x.CreatedSupportRequestAndTagDto.TagId).NotEmpty().NotNull();
     }
 }

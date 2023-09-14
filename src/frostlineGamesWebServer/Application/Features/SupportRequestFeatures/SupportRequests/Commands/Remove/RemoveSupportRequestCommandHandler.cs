@@ -21,10 +21,10 @@ public class RemoveSupportRequestCommandHandler : IRequestHandler<RemoveSupportR
 
     public async Task<RemoveSupportRequestCommandResponse> Handle(RemoveSupportRequestCommandRequest request, CancellationToken cancellationToken)
     {
-        await _supportRequestBusinessRules.SupportRequestShouldBeExist(request.Id);
-        await _supportRequestBusinessRules.StatusShouldBeFalse(request.Id);
+        await _supportRequestBusinessRules.SupportRequestShouldBeExist(request.RemovedSupportRequestDtod.Id);
+        await _supportRequestBusinessRules.StatusShouldBeFalse(request.RemovedSupportRequestDtod.Id);
 
-        SupportRequest supportRequest = await _supportRequestService.GetById(request.Id);
+        SupportRequest supportRequest = await _supportRequestService.GetById(request.RemovedSupportRequestDtod.Id);
 
 
         SupportRequest removedSupportRequest = await _supportRequestService.Remove(supportRequest);
