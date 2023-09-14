@@ -57,4 +57,9 @@ public partial class Bard
     public virtual ICollection<GamCredit> GamCredits { get; set; } = new List<GamCredit>();
 
     public virtual User User { get; set; } = null!;
+
+    public static implicit operator Bard(Domain.Entities.Bards.Bard v)
+    {
+        throw new NotImplementedException();
+    }
 }

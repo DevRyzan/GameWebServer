@@ -1,0 +1,5 @@
+﻿namespace Application.Features.SupportRequestFeatures.SupportRequestComments.Queries.GetActiveListByUserIdAndSuppRequestId;
+
+public class GetActiveListByUserIdAndSuppRequestIdResponse
+{
+}
