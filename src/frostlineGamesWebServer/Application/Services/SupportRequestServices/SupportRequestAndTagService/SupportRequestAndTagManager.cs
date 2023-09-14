@@ -1,6 +1,7 @@
 ﻿using Application.Services.Repositories.SupportRequestRepositories;
 using Core.Persistence.Paging;
 using Domain.Entities.SupportRequests;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.SupportRequestServices.SupportRequestAndTagService;
 
@@ -90,7 +91,11 @@ public class SupportRequestAndTagManager : ISupportRequestAndTagService
     }
     public async Task<IPaginate<SupportRequestAndTag>> GetListByTagId(int tagId, int index = 0, int size = 10)
     {
-        IPaginate<SupportRequestAndTag> paginate = await _supportRequestAndTagRepository.GetListAsync(x => x.TagId.Equals(tagId), index: index, size: size);
+        IPaginate<SupportRequestAndTag> paginate = await _supportRequestAndTagRepository.GetListAsync(
+            index: index,
+            size: size,
+            predicate: x => x.TagId.Equals(tagId),
+            include: t => t.Include(u => u.Request).ThenInclude(u =>u.UserDetail).ThenInclude(e => e.User)); 
         return paginate;
     }
     public async Task<List<SupportRequestAndTag>> GetListByTagIdWithoutPaginate(int tagId)

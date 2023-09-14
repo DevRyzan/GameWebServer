@@ -32,10 +32,12 @@ public class GetActiveListByAssignedUserIdQueryHandler : IRequestHandler<GetActi
 
         GetListResponse<GetActiveListByAssignedUserIdQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetActiveListByAssignedUserIdQueryResponse>>(paginate);
 
-        foreach (var item in mappedResponse.Items)
+        for (int i = 0; i < paginate.Count; i++)
         {
-            var userImageFile = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(item.UserDetailId));
-            userImageFile.Path = item.UserImagePath == null ? "user-images/defaultimage.png" : userImageFile.Path.Replace('\\', '/');
+            var file = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(mappedResponse.Items[i].UserDetailId));
+            file.Path = mappedResponse.Items[i].UserImagePath == null ? "user-images/defaultimage.png" : file.Path.Replace('\\', '/');
+            mappedResponse.Items[i].Title = paginate.Items[i].SupportRequestTitle;
+            mappedResponse.Items[i].Comment = paginate.Items[i].SupportRequestCoomment;
         }
 
         return mappedResponse;

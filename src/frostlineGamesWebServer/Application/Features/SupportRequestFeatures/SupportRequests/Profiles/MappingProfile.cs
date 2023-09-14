@@ -13,8 +13,11 @@ using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetInA
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveByCreatedDate;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveByLoggedId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveForAssignedUserInformation;
+using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByAssignedUserId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByCreatedDate;
+using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByInActive;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByPriority;
+using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByStatusType;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByTagId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByUserId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListInActiveByCreatedDate;
@@ -94,5 +97,19 @@ public class MappingProfile : Profile
 
         CreateMap<SupportRequest, GetListByUserIdSupportRequestQueryResponse>().ReverseMap();
         CreateMap<IPaginate<SupportRequest>, GetListResponse<GetListByUserIdSupportRequestQueryResponse>>().ReverseMap();
+
+        CreateMap<SupportRequestAndTag, GetListByTagIdSupportRequestQueryResponse>().ReverseMap();
+        CreateMap<IPaginate<SupportRequestAndTag>, GetListResponse<GetListByTagIdSupportRequestQueryResponse>>().ReverseMap();
+
+        CreateMap<SupportRequest, GetListByStatusTypeSupportRequestQueryResponse>().ReverseMap();
+        CreateMap<IPaginate<SupportRequest>, GetListResponse<GetListByStatusTypeSupportRequestQueryResponse>>().ReverseMap();
+
+        CreateMap<SupportRequest, GetListByInActiveSupportRequestQueryResponse>().ReverseMap();
+        CreateMap<IPaginate<SupportRequest>, GetListResponse<GetListByInActiveSupportRequestQueryResponse>>().ReverseMap();
+
+
+
+        CreateMap<SupportRequest, GetListByAssignedUserIdSupportRequestQueryResponse>().ReverseMap();
+        CreateMap<IPaginate<SupportRequest>, GetListResponse<GetListByAssignedUserIdSupportRequestQueryResponse>>().ReverseMap();
     }
 }

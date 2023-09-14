@@ -14,6 +14,7 @@ using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetLis
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveByLoggedId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveForAssignedUserInformation;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByActive;
+using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByAssignedUserId;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByCreatedDate;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByInActive;
 using Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByPriority;
@@ -159,7 +160,7 @@ public class SupportRequestController : BaseController
             GetByTagIdSupportRequestDto = getByTagIdSupportRequestDto
         };
 
-        List<GetListByTagIdSupportRequestQueryResponse> result = await Mediator.Send(request);
+        GetListResponse<GetListByTagIdSupportRequestQueryResponse> result = await Mediator.Send(request);
         return Ok(result);
     }
 
@@ -245,12 +246,12 @@ public class SupportRequestController : BaseController
     [HttpGet("GetListByAssignedUserId")]
     public async Task<IActionResult> GetListByAssignedUserId([FromQuery] GetListByListByAssignedUserIdDto getListByListByAssignedUserIdDto)
     {
-        GetInActiveListByAssignedUserIdQueryRequest request = new()
+        GetListByAssignedUserIdSupportRequestQueryRequest request = new()
         {
-            GetListByInActiveListByAssignedUserIdDto = getListByListByAssignedUserIdDto
+             GetListByListByAssignedUserIdDto = getListByListByAssignedUserIdDto
         };
 
-        GetListResponse<GetInActiveListByAssignedUserIdQueryResponse> result = await Mediator.Send(request);
+        GetListResponse<GetListByAssignedUserIdSupportRequestQueryResponse> result = await Mediator.Send(request);
         return Ok(result);
     }
 

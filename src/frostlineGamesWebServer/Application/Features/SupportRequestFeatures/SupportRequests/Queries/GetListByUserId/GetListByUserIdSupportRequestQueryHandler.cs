@@ -37,6 +37,12 @@ public class GetListByUserIdSupportRequestQueryHandler : IRequestHandler<GetList
             userImageFile.Path = item.UserImagePath == null ? "user-images/defaultimage.png" : userImageFile.Path.Replace('\\', '/');
         }
 
+        for (int i = 0; i < supportRequestList.Count; i++)
+        {
+            mappedResponse.Items[i].Title = supportRequestList.Items[i].SupportRequestTitle;
+            mappedResponse.Items[i].Comment = supportRequestList.Items[i].SupportRequestCoomment;
+
+        }
         return mappedResponse;
     }
 }

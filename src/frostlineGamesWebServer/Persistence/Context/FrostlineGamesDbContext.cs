@@ -199,8 +199,8 @@ public partial class FrostlineGamesDbContext : DbContext
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=192.168.1.56;Database=FrostlineGamesDb;User Id=frostline_adm;Password=dUT1@swl;TrustServerCertificate=True; Integrated Security =false;");
 
-    //protected override void OnModelCreating(ModelBuilder modelBuilder)
-    //{
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
         //    modelBuilder.Entity<Abilitiess>(entity =>
         //    {
         //        entity.ToTable("Abilitiess");
@@ -867,16 +867,16 @@ public partial class FrostlineGamesDbContext : DbContext
         //        entity.HasOne(d => d.User);
         //    });
 
-    //    modelBuilder.Entity<UserDetailImageFile>(entity =>
-    //    {
-    //        entity.HasIndex(e => e.UserDetailId, "IX_UserDetailImageFiles_UserDetailId");
+        //modelBuilder.Entity<UserDetailImageFile>(entity =>
+        //{
+        //    entity.HasIndex(e => e.UserDetailId, "IX_UserDetailImageFiles_UserDetailId");
 
-    //        entity.Property(e => e.Id).ValueGeneratedNever();
+        //    entity.Property(e => e.Id).ValueGeneratedNever();
 
-    //        entity.HasOne(d => d.IdNavigation).WithOne(p => p.UserDetailImageFile).HasForeignKey<UserDetailImageFile>(d => d.Id);
+        //    entity.HasOne(d => d.IdNavigation).WithOne(p => p.UserDetailImageFile).HasForeignKey<UserDetailImageFile>(d => d.Id);
 
-    //        entity.HasOne(d => d.UserDetail);
-    //    });
+        //    entity.HasOne(d => d.UserDetail);
+        //});
 
         //    modelBuilder.Entity<UserOperationClaim>(entity =>
         //    {
@@ -896,8 +896,10 @@ public partial class FrostlineGamesDbContext : DbContext
         //        entity.Property(e => e.Code).HasMaxLength(60);
         //    });
 
-    //    OnModelCreatingPartial(modelBuilder);
-    //}
+        modelBuilder.Entity<UserDetailImageFile>().ToTable("UserDetailImageFiles");
+
+        OnModelCreatingPartial(modelBuilder);
+    }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

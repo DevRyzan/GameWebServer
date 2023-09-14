@@ -1,10 +1,11 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Dtos;
 using Core.Application.Caching;
+using Core.Persistence.Paging;
 using MediatR;
 
 namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByTagId;
 
-public class GetListByTagIdSupportRequestQueryRequest : IRequest<List<GetListByTagIdSupportRequestQueryResponse>>, ICachableRequest
+public class GetListByTagIdSupportRequestQueryRequest : IRequest<GetListResponse<GetListByTagIdSupportRequestQueryResponse>>, ICachableRequest
 {
     public GetByTagIdSupportRequestDto GetByTagIdSupportRequestDto { get; set; }
 

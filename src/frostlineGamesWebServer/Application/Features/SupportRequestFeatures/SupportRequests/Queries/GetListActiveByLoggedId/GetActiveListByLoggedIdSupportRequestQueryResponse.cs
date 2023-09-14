@@ -5,8 +5,8 @@ namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.Ge
 public class GetActiveListByLoggedIdSupportRequestQueryResponse
 {
     public int Id { get; set; }
-    public string? Title { get; set; }
-    public string? Comment { get; set; }
+    public string? SupportRequestTitle { get; set; }
+    public string? SupportRequestCoomment { get; set; }
     public string? UserIP { get; set; }
     public Guid? UserId { get; set; }
     public int? UserDetailId { get; set; }

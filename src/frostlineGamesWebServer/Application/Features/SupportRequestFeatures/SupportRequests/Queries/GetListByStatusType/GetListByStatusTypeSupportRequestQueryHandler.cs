@@ -30,10 +30,13 @@ public class GetListByStatusTypeSupportRequestQueryHandler : IRequestHandler<Get
 
         GetListResponse<GetListByStatusTypeSupportRequestQueryResponse> mappedSupportRequestListModel = _mapper.Map<GetListResponse<GetListByStatusTypeSupportRequestQueryResponse>>(supportRequestList);
 
-        foreach (var item in mappedSupportRequestListModel.Items)
+
+        for (int i = 0; i < supportRequestList.Count; i++)
         {
-            var userImageFile = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(item.UserDetailId));
-            userImageFile.Path = item.UserImagePath == null ? "user-images/defaultimage.png" : userImageFile.Path.Replace('\\', '/');
+            var file = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(mappedSupportRequestListModel.Items[i].UserDetailId));
+            file.Path = mappedSupportRequestListModel.Items[i].UserImagePath == null ? "user-images/defaultimage.png" : file.Path.Replace('\\', '/');
+            mappedSupportRequestListModel.Items[i].Title = supportRequestList.Items[i].SupportRequestTitle;
+            mappedSupportRequestListModel.Items[i].Comment = supportRequestList.Items[i].SupportRequestCoomment;
         }
         return mappedSupportRequestListModel;
     }

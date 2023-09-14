@@ -3,7 +3,6 @@ using Application.Services.Repositories.FileRepositories;
 using Application.Services.SupportRequestServices.SupportRequestService;
 using AutoMapper;
 using Core.Persistence.Paging;
-using Domain.Entities.SupportRequests;
 using MediatR;
 
 namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListByInActive;
@@ -27,14 +26,17 @@ public class GetListByInActiveSupportRequestQueryHandler : IRequestHandler<GetLi
     {
         await _supportRequestBusinessRules.SupportRequestListShouldBeListedWhenSelected(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        IPaginate<SupportRequest> inActivesupportRequestList = await _supportRequestService.GetListInActive(request.PageRequest.Page, request.PageRequest.PageSize);
+        IPaginate<Domain.Entities.SupportRequests.SupportRequest> paginate = await _supportRequestService.GetListInActive(request.PageRequest.Page, request.PageRequest.PageSize);
 
-        GetListResponse<GetListByInActiveSupportRequestQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByInActiveSupportRequestQueryResponse>>(inActivesupportRequestList);
+        GetListResponse<GetListByInActiveSupportRequestQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByInActiveSupportRequestQueryResponse>>(paginate);
 
-        foreach (var item in mappedResponse.Items)
+
+        for (int i = 0; i < paginate.Count; i++)
         {
-            var userImageFile = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(item.UserDetailId));
-            userImageFile.Path = item.UserImagePath == null ? "user-images/defaultimage.png" : userImageFile.Path.Replace('\\', '/');
+            var file = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(mappedResponse.Items[i].UserDetailId));
+            file.Path = mappedResponse.Items[i].UserImagePath == null ? "user-images/defaultimage.png" : file.Path.Replace('\\', '/');
+            mappedResponse.Items[i].Title = paginate.Items[i].SupportRequestTitle;
+            mappedResponse.Items[i].Comment = paginate.Items[i].SupportRequestCoomment;
         }
 
         return mappedResponse;

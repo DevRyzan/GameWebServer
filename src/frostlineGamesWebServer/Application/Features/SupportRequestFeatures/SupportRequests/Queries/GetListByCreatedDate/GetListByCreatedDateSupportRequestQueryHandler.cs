@@ -31,10 +31,13 @@ public class GetListByCreatedDateSupportRequestQueryHandler : IRequestHandler<Ge
 
         GetListResponse<GetListByCreatedDateSupportRequestQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByCreatedDateSupportRequestQueryResponse>>(list);
 
-        foreach (var item in mappedResponse.Items)
+
+        for (int i = 0; i < list.Count; i++)
         {
-            var userImageFile = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(item.UserDetailId));
-            userImageFile.Path = item.UserImagePath == null ? "user-images/defaultimage.png" : userImageFile.Path.Replace('\\', '/');
+            var file = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(mappedResponse.Items[i].UserDetailId));
+            file.Path = mappedResponse.Items[i].UserImagePath == null ? "user-images/defaultimage.png" : file.Path.Replace('\\', '/');
+            mappedResponse.Items[i].Title = list.Items[i].SupportRequestTitle;
+            mappedResponse.Items[i].Comment = list.Items[i].SupportRequestCoomment;
         }
 
         return mappedResponse.Items.OrderByDescending(x => x.CreatedDate);

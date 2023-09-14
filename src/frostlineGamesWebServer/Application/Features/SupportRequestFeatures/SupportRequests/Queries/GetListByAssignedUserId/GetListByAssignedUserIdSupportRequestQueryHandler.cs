@@ -1,4 +1,5 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Rules;
+using Application.Services.Repositories.FileRepositories;
 using Application.Services.SupportRequestServices.SupportRequestService;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -30,6 +31,12 @@ public class GetListByAssignedUserIdSupportRequestQueryHandler : IRequestHandler
         IPaginate<SupportRequest> supportRequestList = await _supportRequestService.GetListByAssignedUserId(assignedUserId: request.GetListByListByAssignedUserIdDto.AssignedUserId, index: request.GetListByListByAssignedUserIdDto.PageRequest.Page, size: request.GetListByListByAssignedUserIdDto.PageRequest.PageSize);
 
         GetListResponse<GetListByAssignedUserIdSupportRequestQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByAssignedUserIdSupportRequestQueryResponse>>(supportRequestList);
+
+        for (int i = 0; i < supportRequestList.Count; i++)
+        {
+            mappedResponse.Items[i].Title = supportRequestList.Items[i].SupportRequestTitle;
+            mappedResponse.Items[i].Comment = supportRequestList.Items[i].SupportRequestCoomment;
+        }
         return mappedResponse;
     }
 }

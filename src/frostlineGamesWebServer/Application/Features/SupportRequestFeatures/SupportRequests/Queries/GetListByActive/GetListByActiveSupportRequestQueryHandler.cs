@@ -34,11 +34,12 @@ public class GetListByActiveSupportRequestQueryHandler : IRequestHandler<GetList
 
         GetListResponse<GetListSupportRequestListModel> mappedSupportRequestListModel = _mapper.Map<GetListResponse<GetListSupportRequestListModel>>(supportRequest);
 
-        foreach (var item in mappedSupportRequestListModel.Items)
+        for (int i = 0; i < supportRequest.Count; i++)
         {
-            var userImageFile = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(item.UserDetailId));
-            userImageFile.Path = item.userImagePath == null ? "user-images/defaultimage.png" : userImageFile.Path.Replace('\\', '/');
-
+            var file = await _userDetailImageFileRepository.GetAsync(x => x.UserDetail.Id.Equals(mappedSupportRequestListModel.Items[i].UserDetailId));
+            file.Path = mappedSupportRequestListModel.Items[i].userImagePath == null ? "user-images/defaultimage.png" : file.Path.Replace('\\', '/');
+            mappedSupportRequestListModel.Items[i].Title = supportRequest.Items[i].SupportRequestTitle;
+            mappedSupportRequestListModel.Items[i].Comment = supportRequest.Items[i].SupportRequestCoomment;
         }
         return mappedSupportRequestListModel;
     }
