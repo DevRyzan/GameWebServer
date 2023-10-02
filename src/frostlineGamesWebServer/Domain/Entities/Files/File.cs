@@ -1,6 +1,4 @@
 ﻿using Core.Persistence.Repositories;
-using System.Reflection.Metadata;
-using System.Xml.Linq;
 
 namespace Domain.Entities.Files;
 
@@ -9,9 +7,10 @@ public class File : Entity<int>
     public string FileName { get; set; }
     public string Path { get; set; }
     public string Storage { get; set; }
+
     public File()
     {
-        
+
     }
     //public File()
     //{
@@ -26,7 +25,7 @@ public class File : Entity<int>
         Storage = storage;
     }
 
-    public File(int id ,string fileName, string path, string storage) : base()
+    public File(int id, string fileName, string path, string storage) : base()
     {
         Id = id;
         FileName = fileName;
@@ -34,6 +33,4 @@ public class File : Entity<int>
         Storage = storage;
     }
 
-    //[NotMapped]
-    //public override DateTime UpdatedDate { get => base.UpdatedDate; set => base.UpdatedDate = value; }
 }

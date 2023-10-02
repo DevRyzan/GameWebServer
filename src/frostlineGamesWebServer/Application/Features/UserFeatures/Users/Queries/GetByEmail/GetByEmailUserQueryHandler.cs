@@ -36,7 +36,7 @@ namespace Application.Feature.UserFeatures.Users.Queries.GetByEmail
             mappedResponse.UserId = user.Id;
             mappedResponse.BasketId = userDetail.BasketId;
             mappedResponse.PhoneNumber = userDetail.PhoneNumber;
-            mappedResponse.Address = userDetail.Address;
+            mappedResponse.Address = userDetail.Adress;
             mappedResponse.IsOnline = userDetail.IsOnline;
             mappedResponse.IsBanned = userDetail.IsBanned;
             mappedResponse.LoggedDate = userDetail.LoggedDate;

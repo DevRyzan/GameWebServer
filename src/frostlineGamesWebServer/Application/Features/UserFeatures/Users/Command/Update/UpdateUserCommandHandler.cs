@@ -34,7 +34,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommandRequest
 
         UserDetail userDetail = await _userDetailService.GetByUserId(request.Id);
         userDetail.PhoneNumber = request.PhoneNumber;
-        userDetail.Address = request.Address;
+        userDetail.Adress = request.Address;
         await _userDetailService.Update(userDetail);
 
 

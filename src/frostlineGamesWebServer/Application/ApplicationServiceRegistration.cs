@@ -4,6 +4,15 @@ using Application.Service.OperationClaimService;
 using Application.Service.UserDetailService;
 using Application.Service.UserOperationClaimService;
 using Application.Service.UserService;
+using Application.Services.BardServices;
+using Application.Services.SupportRequestServices.PossibleRequestAndTagService;
+using Application.Services.SupportRequestServices.PossibleRequestService;
+using Application.Services.SupportRequestServices.SupportRequestAndSupportRequestCategoryService;
+using Application.Services.SupportRequestServices.SupportRequestAndTagService;
+using Application.Services.SupportRequestServices.SupportRequestCategoryService;
+using Application.Services.SupportRequestServices.SupportRequestCommentService;
+using Application.Services.SupportRequestServices.SupportRequestService;
+using Application.Services.SupportRequestServices.TagService;
 using Core.Application.Caching;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Rules;
@@ -15,8 +24,7 @@ using Core.Emailling.EmailServices;
 using Core.Emailling.MailToEmail;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel.Design;
-using System.Reflection; 
+using System.Reflection;
 
 namespace Application;
 
@@ -46,7 +54,11 @@ public static class ApplicationServiceRegistration
         services.AddSingleton<IEmailService, EmailManager>();
         services.AddSingleton<IMailService, MailManager>();
         #endregion
-         
+
+        #region Bard
+        services.AddScoped<IBardService, BardManager>();
+        #endregion
+
         #region User
 
         services.AddScoped<IAuthService, AuthManager>();
@@ -56,8 +68,20 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IEmailAuthenticatorService, EmailAuthenticatorManager>();
         services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
         #endregion
-      
-        
+
+        #region SupportRequest
+
+        services.AddScoped<ITagService, TagManager>();
+        services.AddScoped<ISupportRequestService, SupportRequestManager>();
+        services.AddScoped<ISupportRequestCommentService, SupportRequestCommentManager>();
+        services.AddScoped<ISupportRequestCategoryService, SupportRequestCategoryManager>();
+        services.AddScoped<ISupportRequestAndTagService, SupportRequestAndTagManager>();
+        services.AddScoped<ISupportRequestAndSupportRequestCategoryService, SupportRequestAndSupportRequestCategoryManager>();
+        services.AddScoped<IPossibleRequestService, PossibleRequestManager>();
+        services.AddScoped<IPossibleRequestAndTagService, PossibleRequestAndTagManager>();
+        #endregion
+
+
         return services;
     }
     public static IServiceCollection AddSubClassesOfType(this IServiceCollection services, Assembly assembly, Type type, Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null)
