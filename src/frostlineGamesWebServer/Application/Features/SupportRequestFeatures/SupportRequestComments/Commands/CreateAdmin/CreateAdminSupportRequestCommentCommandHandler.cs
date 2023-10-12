@@ -1,9 +1,9 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequestComments.Rules;
 using Application.Service.OperationClaimService;
 using Application.Service.UserOperationClaimService;
-using Application.Service.UserService;
 using Application.Services.SupportRequestServices.SupportRequestCommentService;
 using Application.Services.SupportRequestServices.SupportRequestService;
+using Application.Services.UserServices.UserService;
 using AutoMapper;
 using Core.Application.Generator;
 using Core.Emailling.MailToEmail;

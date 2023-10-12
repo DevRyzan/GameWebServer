@@ -1,8 +1,8 @@
 ﻿using Application.Feature.UserFeatures.Auths.Dtos;
 using Application.Feature.UserFeatures.Auths.Rules;
 using Application.Service.AuthService;
-using Application.Service.UserDetailService;
-using Application.Service.UserService;
+using Application.Services.UserServices.UserDetailService;
+using Application.Services.UserServices.UserService;
 using Core.Application.Transaction;
 using Core.Security.Dtos;
 using Core.Security.Entities;

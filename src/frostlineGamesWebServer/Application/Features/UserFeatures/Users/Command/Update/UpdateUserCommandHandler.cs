@@ -1,6 +1,6 @@
 ﻿using Application.Feature.UserFeatures.Users.Rules;
-using Application.Service.UserDetailService;
-using Application.Service.UserService;
+using Application.Services.UserServices.UserDetailService;
+using Application.Services.UserServices.UserService;
 using AutoMapper;
 using Core.Security.Entities;
 using Domain.Entities.Users;

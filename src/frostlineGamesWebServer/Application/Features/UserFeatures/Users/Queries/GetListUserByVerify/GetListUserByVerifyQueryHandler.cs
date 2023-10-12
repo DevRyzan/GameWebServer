@@ -1,12 +1,10 @@
 ﻿using Application.Feature.UserFeatures.Users.Rules;
 using Application.Service.EmailAuthenticatorService;
-using Application.Service.UserService;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using AutoMapper;
 using MediatR;
-
-
+using Application.Services.UserServices.UserService;
 
 namespace Application.Feature.UserFeatures.Users.Queries.GetListUserByVerify;
 

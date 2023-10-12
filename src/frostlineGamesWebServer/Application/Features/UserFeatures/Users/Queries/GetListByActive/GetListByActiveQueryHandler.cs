@@ -1,5 +1,4 @@
-﻿using Application.Feature.UserFeatures.Users.Queries.GetListByInActive;
-using Application.Service.UserService;
+﻿using Application.Services.UserServices.UserService;
 using AutoMapper;
 using Core.Persistence.Paging;
 using Core.Security.Entities;

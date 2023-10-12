@@ -11,6 +11,7 @@ using Persistence.Repositories;
 using Persistence.Repositories.BardRepositories;
 using Persistence.Repositories.FileRepositories;
 using Persistence.Repositories.SupportRequestRepositories;
+using Persistence.Repositories.TeamAndEmployeeRepositories;
 using Persistence.Repositories.UserRepositories;
 
 namespace Persistence;
@@ -38,6 +39,11 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+        #endregion
+
+        #region TeamAndEmployee
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
         #endregion
 
         #region File

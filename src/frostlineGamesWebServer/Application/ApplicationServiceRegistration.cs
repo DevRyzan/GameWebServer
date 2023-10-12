@@ -1,10 +1,9 @@
 ﻿using Application.Service.AuthService;
 using Application.Service.EmailAuthenticatorService;
 using Application.Service.OperationClaimService;
-using Application.Service.UserDetailService;
 using Application.Service.UserOperationClaimService;
-using Application.Service.UserService;
 using Application.Services.BardServices;
+using Application.Services.EmployeeService;
 using Application.Services.SupportRequestServices.PossibleRequestAndTagService;
 using Application.Services.SupportRequestServices.PossibleRequestService;
 using Application.Services.SupportRequestServices.SupportRequestAndSupportRequestCategoryService;
@@ -13,7 +12,12 @@ using Application.Services.SupportRequestServices.SupportRequestCategoryService;
 using Application.Services.SupportRequestServices.SupportRequestCommentService;
 using Application.Services.SupportRequestServices.SupportRequestService;
 using Application.Services.SupportRequestServices.TagService;
+using Application.Services.TeamService;
+using Application.Services.UserDetailService;
+using Application.Services.UserServices.UserDetailService;
+using Application.Services.UserServices.UserService;
 using Core.Application.Caching;
+using Core.Application.Generator;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Rules;
 using Core.Application.Pipelines.Validation;
@@ -53,6 +57,7 @@ public static class ApplicationServiceRegistration
         services.AddSingleton<LoggerServiceBase, FileLogger>(); 
         services.AddSingleton<IEmailService, EmailManager>();
         services.AddSingleton<IMailService, MailManager>();
+        services.AddSingleton<IRandomCodeGenerator, RandomCodeGenerator>();
         #endregion
 
         #region Bard
@@ -67,6 +72,11 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IOperationClaimService, OperationClaimManager>();
         services.AddScoped<IEmailAuthenticatorService, EmailAuthenticatorManager>();
         services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
+        #endregion
+
+        #region TeamAndEmployee
+        services.AddScoped<IEmployeeService, EmployeeManager>();
+        services.AddScoped<ITeamService, TeamManager>();
         #endregion
 
         #region SupportRequest

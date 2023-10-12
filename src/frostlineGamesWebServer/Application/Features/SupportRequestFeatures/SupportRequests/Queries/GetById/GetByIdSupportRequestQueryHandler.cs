@@ -1,6 +1,6 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Rules;
-using Application.Service.UserDetailService;
 using Application.Services.SupportRequestServices.SupportRequestService;
+using Application.Services.UserServices.UserDetailService;
 using AutoMapper;
 using Domain.Entities.SupportRequests;
 using MediatR;

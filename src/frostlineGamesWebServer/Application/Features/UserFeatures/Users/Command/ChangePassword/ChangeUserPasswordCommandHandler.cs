@@ -1,7 +1,7 @@
 ﻿using Application.Feature.UserFeatures.Users.Rules;
 using Application.Service.AuthService;
-using Application.Service.UserDetailService;
-using Application.Service.UserService;
+using Application.Services.UserServices.UserDetailService;
+using Application.Services.UserServices.UserService;
 using Core.Security.Entities;
 using Core.Security.Enums;
 using Core.Security.Hashing;

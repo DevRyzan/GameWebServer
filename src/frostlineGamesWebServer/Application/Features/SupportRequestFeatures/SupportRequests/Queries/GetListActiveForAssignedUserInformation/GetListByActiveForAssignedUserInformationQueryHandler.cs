@@ -1,14 +1,16 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Rules;
-using Application.Service.UserDetailService;
-using Application.Service.UserService;
 using Application.Services.Repositories.FileRepositories;
 using Application.Services.SupportRequestServices.SupportRequestService;
 using AutoMapper;
 using Core.Persistence.Paging;
 using Domain.Entities.SupportRequests;
 using MediatR;
+using Application.Services.UserServices.UserDetailService;
+using Application.Services.UserServices.UserService;
+
 
 namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveForAssignedUserInformation;
+
 
 public class GetListByActiveForAssignedUserInformationQueryHandler : IRequestHandler<GetListByActiveForAssignedUserInformationQueryRequest, GetListResponse<GetListByActiveForAssignedUserInformationQueryResponse>>
 {

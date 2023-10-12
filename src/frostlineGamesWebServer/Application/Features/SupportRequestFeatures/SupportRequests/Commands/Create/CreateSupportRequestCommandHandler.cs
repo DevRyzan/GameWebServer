@@ -1,13 +1,12 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Rules;
-using Application.Service.UserDetailService;
-using Application.Service.UserService;
 using Application.Services.BardServices;
 using Application.Services.SupportRequestServices.SupportRequestService;
+using Application.Services.UserServices.UserDetailService;
+using Application.Services.UserServices.UserService;
 using AutoMapper;
 using Core.Application.Generator;
 using Core.Emailling.MailToEmail;
 using Core.Security.Entities;
-using Domain.Entities.Bards;
 using Domain.Entities.SupportRequests;
 using Domain.Entities.Users;
 using Domain.Enums;

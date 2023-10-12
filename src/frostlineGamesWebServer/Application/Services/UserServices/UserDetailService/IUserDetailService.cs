@@ -1,5 +1,7 @@
 ﻿using Domain.Entities.Users; 
-namespace Application.Service.UserDetailService;
+
+
+namespace Application.Services.UserServices.UserDetailService;
 
 public interface IUserDetailService
 {
