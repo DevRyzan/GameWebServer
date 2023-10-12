@@ -2,8 +2,9 @@
 using Application.Service.EmailAuthenticatorService;
 using Application.Service.OperationClaimService;
 using Application.Service.UserOperationClaimService;
-using Application.Services.BardServices;
-using Application.Services.EmployeeService;
+using Application.Services.BardServices; 
+using Application.Services.EmployeeService; 
+using Application.Services.SubscriptionServices; 
 using Application.Services.SupportRequestServices.PossibleRequestAndTagService;
 using Application.Services.SupportRequestServices.PossibleRequestService;
 using Application.Services.SupportRequestServices.SupportRequestAndSupportRequestCategoryService;
@@ -53,6 +54,8 @@ public static class ApplicationServiceRegistration
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+        services.AddSingleton<IRandomCodeGenerator, RandomCodeGenerator>();
+
         #region Core
         services.AddSingleton<LoggerServiceBase, FileLogger>(); 
         services.AddSingleton<IEmailService, EmailManager>();
@@ -89,6 +92,10 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISupportRequestAndSupportRequestCategoryService, SupportRequestAndSupportRequestCategoryManager>();
         services.AddScoped<IPossibleRequestService, PossibleRequestManager>();
         services.AddScoped<IPossibleRequestAndTagService, PossibleRequestAndTagManager>();
+        #endregion
+
+        #region Subscription
+        services.AddScoped<ISubscriptionService, SubscriptionManager>();
         #endregion
 
 
