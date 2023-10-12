@@ -27,19 +27,17 @@ public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscripti
         // Check if the user exists before proceeding with subscription creation
         await _subscriptionBusinessRules.UserShouldBeExistsWhenSelected(request.UserId);
 
-        // Map the data from the request to a Subscription object
-        Subscription mappedSubscription = _mapper.Map<Subscription>(request.CreatedSubscriptionDto);
-        mappedSubscription.UserId = (Guid)request.UserId;
-
-        // Generate a unique code for the subscription
-        mappedSubscription.Code = _randomCodeGenerator.GenerateUniqueCode();
-
-        // Set the subscription status to active and mark it as not deleted
-        mappedSubscription.Status = true;
-        mappedSubscription.IsDeleted = false;
-
-        // Set the creation date of the subscription
-        mappedSubscription.CreatedDate = DateTime.Now;
+        Subscription mappedSubscription = new()
+        {
+            UserId = (Guid)request.UserId,
+            Price = request.CreatedSubscriptionDto.Price,
+            SubscriptionType = request.CreatedSubscriptionDto.subscriptionType,
+            Code = _randomCodeGenerator.GenerateUniqueCode(),
+            Status = true,
+            IsDeleted = false,
+            CreatedDate = DateTime.UtcNow,
+            Description = request.CreatedSubscriptionDto.Description,
+        };
 
         // Create the subscription in the service
         await _subscriptionService.Create(mappedSubscription);

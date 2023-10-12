@@ -27,7 +27,7 @@ public class GetListByLoggedUserQueryHandler : IRequestHandler<GetListByLoggedUs
         await _subscriptionBusinessRules.SubscriptionListShouldBeListedWhenSelected(request.GetListByUserIdSubscriptionDto.PageRequest.Page, request.GetListByUserIdSubscriptionDto.PageRequest.PageSize);
 
         // Retrieve a paginated list of subscriptions by user ID, using the provided page and page size
-        IPaginate<Subscription> subscriptionList = await _subscriptionService.GetListByUserId(request.GetListByUserIdSubscriptionDto.UserId, request.GetListByUserIdSubscriptionDto.PageRequest.Page, request.GetListByUserIdSubscriptionDto.PageRequest.PageSize);
+        IPaginate<Subscription> subscriptionList = await _subscriptionService.GetListByUserId(request.UserId, request.GetListByUserIdSubscriptionDto.PageRequest.Page, request.GetListByUserIdSubscriptionDto.PageRequest.PageSize);
 
         // Map the retrieved list of subscriptions to a response DTO
         GetListResponse<GetListByLoggedUserQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetListByLoggedUserQueryResponse>>(subscriptionList);

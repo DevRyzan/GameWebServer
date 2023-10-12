@@ -38,7 +38,7 @@ public class MappingProfiles : Profile
         CreateMap<Subscription, GetListBySubscriptionTypeQueryResponse>().ReverseMap();
         CreateMap<IPaginate<Subscription>, GetListResponse<GetListBySubscriptionTypeQueryResponse>>().ReverseMap();
 
-        CreateMap<Subscription, GetListBySubscriptionTypeQueryResponse>().ReverseMap();
+        CreateMap<Subscription, GetListByLoggedUserQueryResponse>().ReverseMap();
         CreateMap<IPaginate<Subscription>, GetListResponse<GetListByLoggedUserQueryResponse>>().ReverseMap();
     }
 }
