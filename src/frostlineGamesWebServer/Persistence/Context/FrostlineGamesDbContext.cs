@@ -1,5 +1,6 @@
 ﻿using Core.Security.Entities;
 using Domain.Entities.Files;
+using Domain.Entities.Subscriptions;
 using Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -161,7 +162,7 @@ public partial class FrostlineGamesDbContext : DbContext
 
     //public virtual DbSet<Skin> Skins { get; set; }
 
-    //public virtual DbSet<Subscription> Subscriptions { get; set; }
+    public virtual DbSet<Subscription> Subscriptions { get; set; }
 
     //public virtual DbSet<SubscriptionCategory> SubscriptionCategories { get; set; }
 
