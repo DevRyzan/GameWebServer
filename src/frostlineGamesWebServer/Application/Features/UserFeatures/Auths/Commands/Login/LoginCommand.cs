@@ -28,7 +28,7 @@ public class LoginCommand : IRequest<LoggedDto>, ITransactionalRequest
         {
             _userService = userService;
             _authService = authService;
-            _userDetailService = userDetailService;
+            _userDetailService = userDetailService; 
             _authBusinessRules = authBusinessRules;
         }
 
