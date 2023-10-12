@@ -1,7 +1,7 @@
 ﻿using Application.Feature.UserFeatures.Auths.Rules;
 using Application.Service.AuthService;
 using Application.Service.Repositories;
-using Application.Service.UserService;
+using Application.Services.UserServices.UserService;
 using Core.Application.Transaction;
 using Core.Emailling.EmailServices;
 using Core.Emailling.Models;
@@ -10,7 +10,9 @@ using Core.Security.Enums;
 using MediatR;
 using System.Web;
 
+
 namespace Application.Feature.UserFeatures.Auths.Commands.AuthenticatorCodeSenderToEmail;
+
 
 public class AuthenticatorCodeSenderToEmailCommand : IRequest, ITransactionalRequest
 {

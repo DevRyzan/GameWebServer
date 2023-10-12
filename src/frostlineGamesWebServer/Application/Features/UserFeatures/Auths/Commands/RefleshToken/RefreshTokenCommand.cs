@@ -1,11 +1,12 @@
 ﻿using Application.Service.AuthService;
-using Application.Service.UserService;
 using MediatR;
 using Core.Security.Entities; 
 using Core.Security.JWT;
 using Application.Feature.UserFeatures.Auths.Dtos;
 using Application.Feature.UserFeatures.Auths.Rules;
 using Core.Application.Transaction;
+using Application.Services.UserServices.UserService;
+
 
 namespace Application.Feature.UserFeatures.Auths.Commands.RefleshToken;
 

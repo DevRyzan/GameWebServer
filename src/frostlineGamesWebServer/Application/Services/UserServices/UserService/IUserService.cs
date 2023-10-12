@@ -1,7 +1,8 @@
 ﻿using Core.Persistence.Paging;
 using Core.Security.Entities; 
 
-namespace Application.Service.UserService;
+
+namespace Application.Services.UserServices.UserService;
 
 public interface IUserService
 {

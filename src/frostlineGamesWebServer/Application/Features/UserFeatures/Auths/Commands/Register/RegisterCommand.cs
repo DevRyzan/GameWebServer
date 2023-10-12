@@ -2,8 +2,8 @@
 using Application.Feature.UserFeatures.Auths.Rules;
 using Application.Service.AuthService;
 using Application.Service.Repositories;
-using Application.Service.UserDetailService;
 using Application.Services.Repositories.UserRepositories;
+using Application.Services.UserServices.UserDetailService;
 using AutoMapper;
 using Core.Application.Generator;
 using Core.Application.Transaction;

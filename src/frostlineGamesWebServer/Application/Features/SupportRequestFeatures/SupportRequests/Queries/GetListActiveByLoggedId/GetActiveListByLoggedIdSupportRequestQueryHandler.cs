@@ -1,13 +1,15 @@
 ﻿using Application.Features.SupportRequestFeatures.SupportRequests.Rules;
-using Application.Service.UserDetailService;
 using Application.Services.Repositories.FileRepositories;
 using Application.Services.SupportRequestServices.SupportRequestService;
+using Application.Services.UserServices.UserDetailService;
 using AutoMapper;
 using Core.Persistence.Paging;
 using Domain.Entities.SupportRequests;
 using MediatR;
 
+
 namespace Application.Features.SupportRequestFeatures.SupportRequests.Queries.GetListActiveByLoggedId;
+
 
 public class GetActiveListByLoggedIdSupportRequestQueryHandler : IRequestHandler<GetActiveListByLoggedIdSupportRequestQueryRequest, GetListResponse<GetActiveListByLoggedIdSupportRequestQueryResponse>>
 {

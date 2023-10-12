@@ -2,14 +2,16 @@
 using AutoMapper;
 using Core.Security.Entities;
 using Core.Security.Hashing;
-using Application.Service.UserDetailService;
-using Application.Service.UserService;
 using Domain.Entities.Users;
 using Core.Application.Generator;
 using Application.Feature.UserFeatures.Users.Rules; 
 using Domain.Entities.Files;
+using Application.Services.UserServices.UserService;
+using Application.Services.UserServices.UserDetailService;
+
 
 namespace Application.Feature.UserFeatures.Users.Command.Create;
+
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
 {

@@ -1,7 +1,9 @@
-﻿namespace Core.Application.Generator;
+ 
+namespace Core.Application.Generator;
 
 public class RandomCodeGenerator : IRandomCodeGenerator
 {
+ 
     private static readonly Random random = new Random();
 
     private static readonly string datePart = DateTime.Now.ToString("yyyyMMdd");
@@ -40,4 +42,5 @@ public class RandomCodeGenerator : IRandomCodeGenerator
 
     public string GenerateUniqueCodeNumber()
         => number1 + "-" + number2 + "-" + number3;
+ 
 }

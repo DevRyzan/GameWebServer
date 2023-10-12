@@ -1,6 +1,5 @@
 ﻿using Application.Service.AuthService;
-using Application.Service.Repositories;
-using Application.Service.UserService;
+using Application.Services.UserServices.UserService;
 using Core.Emailling.EmailServices;
 using Core.Security.Entities;
 using Core.Security.Enums;
@@ -9,6 +8,8 @@ using System.Web;
 using Core.Emailling.Models;
 using Application.Feature.UserFeatures.Auths.Rules;
 using Core.Application.Transaction;
+using Application.Service.Repositories;
+
 
 namespace Application.Feature.UserFeatures.Auths.Commands.EnableEmailAuthenticator;
 
