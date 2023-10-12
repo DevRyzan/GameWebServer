@@ -5,6 +5,7 @@ using Application.Service.UserDetailService;
 using Application.Service.UserOperationClaimService;
 using Application.Service.UserService;
 using Application.Services.BardServices;
+using Application.Services.SubscriptionServices;
 using Application.Services.SupportRequestServices.PossibleRequestAndTagService;
 using Application.Services.SupportRequestServices.PossibleRequestService;
 using Application.Services.SupportRequestServices.SupportRequestAndSupportRequestCategoryService;
@@ -14,6 +15,7 @@ using Application.Services.SupportRequestServices.SupportRequestCommentService;
 using Application.Services.SupportRequestServices.SupportRequestService;
 using Application.Services.SupportRequestServices.TagService;
 using Core.Application.Caching;
+using Core.Application.Generator;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Rules;
 using Core.Application.Pipelines.Validation;
@@ -49,6 +51,8 @@ public static class ApplicationServiceRegistration
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+        services.AddSingleton<IRandomCodeGenerator, RandomCodeGenerator>();
+
         #region Core
         services.AddSingleton<LoggerServiceBase, FileLogger>(); 
         services.AddSingleton<IEmailService, EmailManager>();
@@ -79,6 +83,10 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISupportRequestAndSupportRequestCategoryService, SupportRequestAndSupportRequestCategoryManager>();
         services.AddScoped<IPossibleRequestService, PossibleRequestManager>();
         services.AddScoped<IPossibleRequestAndTagService, PossibleRequestAndTagManager>();
+        #endregion
+
+        #region Subscription
+        services.AddScoped<ISubscriptionService, SubscriptionManager>();
         #endregion
 
 

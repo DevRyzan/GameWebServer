@@ -1,6 +1,7 @@
 ﻿using Application.Service.Repositories;
 using Application.Services.Repositories.BardRepositories;
 using Application.Services.Repositories.FileRepositories;
+using Application.Services.Repositories.SubscriptionRepositories;
 using Application.Services.Repositories.SupportRequestRepositories;
 using Application.Services.Repositories.UserRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Persistence.Context;
 using Persistence.Repositories;
 using Persistence.Repositories.BardRepositories;
 using Persistence.Repositories.FileRepositories;
+using Persistence.Repositories.SubscriptionRepositories;
 using Persistence.Repositories.SupportRequestRepositories;
 using Persistence.Repositories.UserRepositories;
 
@@ -54,6 +56,10 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ISupportRequestAndSupportRequestCategoryRepository, SupportRequestAndSupportRequestCategoryRepository>();
         services.AddScoped<IPossibleRequestRepository, PossibleRequestRepository>();
         services.AddScoped<IPossibleRequestAndTagRepository, PossibleRequestAndTagRepository>();
+        #endregion
+
+        #region Subscription
+        services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
         #endregion
 
 
