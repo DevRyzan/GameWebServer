@@ -1,0 +1,38 @@
+﻿using Application.Features.SubscriptionFeatures.Subscriptions.Rules;
+using Application.Services.SubscriptionServices;
+using AutoMapper;
+using Core.Persistence.Paging;
+using Domain.Entities.Subscriptions;
+using MediatR;
+
+namespace Application.Features.SubscriptionFeatures.Subscriptions.Queries.GetListByInActive;
+
+public class GetLisByInActiveQueryHandler : IRequestHandler<GetLisByInActiveQueryRequest, GetListResponse<GetLisByInActiveQueryResponse>>
+{
+    private readonly ISubscriptionService _subscriptionService;
+    private readonly IMapper _mapper;
+    private readonly SubscriptionBusinessRules _subscriptionBusinessRules;
+
+    public GetLisByInActiveQueryHandler(ISubscriptionService subscriptionService, IMapper mapper, SubscriptionBusinessRules subscriptionBusinessRules)
+    {
+        _subscriptionService = subscriptionService;
+        _mapper = mapper;
+        _subscriptionBusinessRules = subscriptionBusinessRules;
+    }
+
+    public async Task<GetListResponse<GetLisByInActiveQueryResponse>> Handle(GetLisByInActiveQueryRequest request, CancellationToken cancellationToken)
+    {
+        // Check if the list of subscriptions should be listed based on the provided page and page size
+        await _subscriptionBusinessRules.SubscriptionListShouldBeListedWhenSelected(request.PageRequest.Page, request.PageRequest.PageSize);
+
+        // Retrieve a paginated list of inactive subscriptions using the provided page and page size
+        IPaginate<Subscription> subscriptionList = await _subscriptionService.GetListByInActive(request.PageRequest.Page, request.PageRequest.PageSize);
+
+        // Map the retrieved list of inactive subscriptions to a response DTO
+        GetListResponse<GetLisByInActiveQueryResponse> mappedResponse = _mapper.Map<GetListResponse<GetLisByInActiveQueryResponse>>(subscriptionList);
+
+        // Return the mapped response
+        return mappedResponse;
+
+    }
+}
