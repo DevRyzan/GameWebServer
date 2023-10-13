@@ -9,7 +9,5 @@ public interface IRandomCodeGenerator
 
     string GenerateUniqueCodeNumberWithDateTime();
  
-    string GenerateUniqueCode();
-    string GenerateUniqueCodeNumberWithDateTime(); 
     string GenerateUniqueCodeNumber();
 }
