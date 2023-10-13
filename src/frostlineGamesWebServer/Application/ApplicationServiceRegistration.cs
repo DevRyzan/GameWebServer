@@ -13,6 +13,7 @@ using Application.Services.SupportRequestServices.SupportRequestCategoryService;
 using Application.Services.SupportRequestServices.SupportRequestCommentService;
 using Application.Services.SupportRequestServices.SupportRequestService;
 using Application.Services.SupportRequestServices.TagService;
+using Application.Services.TeamAndEmployeeService;
 using Application.Services.TeamService;
 using Application.Services.UserDetailService;
 using Application.Services.UserServices.UserDetailService;
@@ -80,6 +81,7 @@ public static class ApplicationServiceRegistration
         #region TeamAndEmployee
         services.AddScoped<IEmployeeService, EmployeeManager>();
         services.AddScoped<ITeamService, TeamManager>();
+        services.AddScoped<ITeamAndEmployeeService, TeamAndEmployeeManager>();
         #endregion
 
         #region SupportRequest

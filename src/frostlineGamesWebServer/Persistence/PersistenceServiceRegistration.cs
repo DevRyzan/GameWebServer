@@ -3,6 +3,7 @@ using Application.Services.Repositories.BardRepositories;
 using Application.Services.Repositories.FileRepositories;
 using Application.Services.Repositories.SubscriptionRepositories;
 using Application.Services.Repositories.SupportRequestRepositories;
+using Application.Services.Repositories.TeamAndEmployeeRepositories;
 using Application.Services.Repositories.UserRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -46,6 +47,7 @@ public static class PersistenceServiceRegistration
         #region TeamAndEmployee
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<ITeamAndEmployeeRepository, TeamAndEmployeeRepository>();
         #endregion
 
         #region File
