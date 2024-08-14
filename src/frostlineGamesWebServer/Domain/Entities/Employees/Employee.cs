@@ -12,7 +12,7 @@ public class Employee : Entity<Guid>
 
 
 
-
+     
     public virtual ICollection<TeamAndEmployees>? TeamAndEmployees { get; set; }
     public virtual ICollection<SupportRequests.SupportRequest> SupportRequest { get; set; }
     public Employee()
